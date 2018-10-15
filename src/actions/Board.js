@@ -24,13 +24,7 @@ export const startAddBoard = (boardData = {}) => {
       users,
       color
     };
-    return ref.set(board).then(() => {
-      dispatch(
-        addBoard({
-          ...board
-        })
-      );
-    });
+    return ref.set(board);
   };
 };
 
