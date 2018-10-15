@@ -7,6 +7,7 @@ import BoardContainer from "./Components/BoardContainer";
 import LandingPage from "./Components/LandingPage";
 import Profile from "./Components/Profile";
 import db from "../firebase/firebase";
+import { justAddBoard, justRemoveBoard } from "./actions/Board";
 
 class App extends Component {
   static propTypes = {
@@ -22,10 +23,13 @@ class App extends Component {
         .onSnapshot(querySnapchot => {
           querySnapchot.docChanges.forEach(change => {
             if (change.type === "added") {
+              this.props.justAddBoard(change.doc.data());
             }
             if (change.type === "modified") {
+              this.props.justAddBoard(change.doc.data());
             }
             if (change.type === "removed") {
+              this.props.justRemoveBoard(change.doc.data().id);
             }
           });
         });
@@ -64,4 +68,14 @@ const mapStateToProps = state => {
   };
 };
 
-export default withRouter(connect(mapStateToProps)(App));
+const mapDispatchToProps = dispatch => ({
+  justAddBoard: board => dispatch(justAddBoard(board)),
+  justRemoveBoard: boardId => dispatch(justRemoveBoard(boardId))
+});
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(App)
+);

@@ -5,6 +5,12 @@ export const addBoard = board => ({
   payload: board
 });
 
+export const justAddBoard = (boardData = {}) => {
+  return dispatch => {
+    return dispatch(addBoard(boardData));
+  };
+};
+
 export const startAddBoard = (boardData = {}) => {
   return dispatch => {
     const { title = "", lists = [], users = {}, color = "blue" } = boardData;
@@ -25,5 +31,16 @@ export const startAddBoard = (boardData = {}) => {
         })
       );
     });
+  };
+};
+
+export const removeBoard = boardId => ({
+  type: "DELETE_BOARD",
+  payload: boardId
+});
+
+export const justRemoveBoard = boardId => {
+  return dispatch => {
+    return dispatch(removeBoard(boardId));
   };
 };
