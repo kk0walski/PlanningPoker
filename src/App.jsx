@@ -6,7 +6,7 @@ import Home from "./Components/Home";
 import BoardContainer from "./Components/BoardContainer";
 import LandingPage from "./Components/LandingPage";
 import Profile from "./Components/Profile";
-import db from "../firebase/firebase";
+import db from "./firebase/firebase";
 import { justAddBoard, justRemoveBoard } from "./actions/Board";
 
 class App extends Component {
