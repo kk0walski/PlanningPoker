@@ -1,0 +1,42 @@
+@import "../base/settings";
+.board {
+  display: inline-flex;
+  height: 100%;
+  min-width: 100%;
+}
+
+.board-underlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  transition: background 0.3s;
+}
+.green {
+  background: $green;
+}
+.blue {
+  background: $blue;
+}
+.red {
+  background: $red;
+}
+.pink {
+  background: $pink;
+}
+
+.lists-wrapper {
+  display: inline-flex;
+  box-sizing: border-box;
+  height: 100%;
+  padding: 85px 5px 8px 5px;
+}
+
+.lists {
+  display: inline-flex;
+  align-items: flex-start;
+  height: 100%;
+  user-select: none;
+}
