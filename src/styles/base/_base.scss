@@ -1,0 +1,61 @@
+// Base styles
+
+html {
+  height: 100%;
+  width: 100%;
+  &::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    background: #ddd;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+    background: #aaa;
+  }
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  font-family: "Helvetica Neue", "Segoe UI", "Trebuchet MS", Geneva, Tahoma,
+    sans-serif;
+  line-height: 1;
+}
+
+#app {
+  display: grid;
+  height: 100%;
+  min-width: 100%;
+}
+
+button,
+span,
+a {
+  vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+}
+
+h2 {
+  font-size: 20px;
+  line-height: 24px;
+  margin: 0 0 8px;
+}
+
+input[type="submit"] {
+  background-color: #dfe3e6;
+  box-shadow: 0 1px 0 0 #c2ccd1;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 700;
+  line-height: 20px;
+  margin: 8px 4px 0 0;
+  padding: 6px 12px;
+  text-align: center;
+}
