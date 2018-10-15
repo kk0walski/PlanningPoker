@@ -25,7 +25,7 @@ class Home extends Component {
     return (
       <div style={{ width: "100%" }}>
         <Helmet>
-          <title>Home | Team Estimation Game</title>
+          <title>Home | Planning Poker</title>
         </Helmet>
         <Header />
         <div className="home">
