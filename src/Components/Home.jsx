@@ -24,13 +24,11 @@ class Home extends Component {
   };
 
   componentWillMount() {
-    console.log("MOUNTING");
     const { user } = this.props;
     if (user) {
-      console.log("Listener Mounting");
       this.boards = db
         .collection("boards")
-        .where("users", "array-contains", user.uid)
+        .where("users", "array-contains", user.uid.toString())
         .onSnapshot(querySnapchot => {
           querySnapchot.docChanges().forEach(change => {
             if (change.type === "added") {
