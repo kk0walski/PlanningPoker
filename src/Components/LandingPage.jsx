@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet";
 import { FaGithub } from "react-icons/fa";
 import { FaUserSecret } from "react-icons/fa";
 import kanbanLogo from "../assets/images/kanban-logo.svg";
-import { firebase } from "../firebase/firebase";
+import { firebase } from "../../firebase/firebase";
 import { enterAsUser } from "../actions/User";
 
 class LandingPage extends React.Component {
