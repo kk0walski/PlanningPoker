@@ -6,11 +6,35 @@ import Home from "./Components/Home";
 import BoardContainer from "./Components/BoardContainer";
 import LandingPage from "./Components/LandingPage";
 import Profile from "./Components/Profile";
+import db from "../firebase/firebase";
 
 class App extends Component {
   static propTypes = {
     user: PropTypes.object
   };
+
+  componentDidMount() {
+    const { user } = this.props;
+    if (user) {
+      this.boards = db
+        .collection("boards")
+        .where("users", "array-contains", user.uid)
+        .onSnapshot(querySnapchot => {
+          querySnapchot.docChanges.forEach(change => {
+            if (change.type === "added") {
+            }
+            if (change.type === "modified") {
+            }
+            if (change.type === "removed") {
+            }
+          });
+        });
+    }
+  }
+
+  componentWillUnmount() {
+    this.boards();
+  }
 
   render() {
     const { user } = this.props;
