@@ -16,10 +16,10 @@ class Board extends Component {
   };
 
   render() {
-    const { boardId, boardTitle, listsOrder } = this.props;
+    const { boardId, boardTitle, boardColor, listsOrder } = this.props;
     return (
       <div>
-        <div className={classnames("board", "blue")}>
+        <div className={classnames("board", boardColor)}>
           <Helmet>
             <title>{boardTitle} | Team Estimation Game</title>
           </Helmet>
