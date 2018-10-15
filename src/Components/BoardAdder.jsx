@@ -32,7 +32,8 @@ class BoardAdder extends React.Component {
     const { user } = this.props;
     const boardData = {
       title,
-      users: [user.uid]
+      users: [user.uid],
+      user
     };
     this.props.startAddBoard(boardData);
     this.setState({ isOpen: false, title: "" });

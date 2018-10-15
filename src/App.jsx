@@ -21,6 +21,9 @@ class App extends Component {
         this.props.user.uid !== prevProps.user.uid
       ) {
         const { user } = this.props;
+        if (this.boards) {
+          this.boards();
+        }
         this.boards = db
           .collection("boards")
           .where("users", "array-contains", user.uid.toString())

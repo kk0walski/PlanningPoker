@@ -13,7 +13,13 @@ export const justAddBoard = (boardData = {}) => {
 
 export const startAddBoard = (boardData = {}) => {
   return dispatch => {
-    const { title = "", lists = [], users = [], color = "blue" } = boardData;
+    const {
+      title = "",
+      lists = [],
+      users = [],
+      user = {},
+      color = "blue"
+    } = boardData;
 
     const ref = db.collection("boards").doc();
     const key = ref.id;
@@ -24,7 +30,12 @@ export const startAddBoard = (boardData = {}) => {
       users,
       color
     };
-    return ref.set(board);
+    ref.set(board);
+    db.collection("boards")
+      .doc(key.toString())
+      .collection("users")
+      .doc(user.uid.toString())
+      .set(user);
   };
 };
 
