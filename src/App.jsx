@@ -23,13 +23,13 @@ class App extends Component {
         .onSnapshot(querySnapchot => {
           querySnapchot.docChanges.forEach(change => {
             if (change.type === "added") {
-              this.props.justAddBoard(change.doc.data());
+              console.log("Added board: ", change.doc.data());
             }
             if (change.type === "modified") {
-              this.props.justAddBoard(change.doc.data());
+              console.log("Changed board: ", change.doc.data());
             }
             if (change.type === "removed") {
-              this.props.justRemoveBoard(change.doc.data().id);
+              console.log("Removed board: ", change.doc.data());
             }
           });
         });
