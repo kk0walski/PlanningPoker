@@ -14,9 +14,10 @@ class App extends Component {
     user: PropTypes.object
   };
 
-  componentDidMount() {
+  componentDidUpdate() {
     const { user } = this.props;
     if (user) {
+      console.log("Listener Mounting");
       this.boards = db
         .collection("boards")
         .where("users", "array-contains", user.uid)
@@ -37,6 +38,7 @@ class App extends Component {
   }
 
   componentWillUnmount() {
+    console.log("Listener UnMounting");
     this.boards();
   }
 

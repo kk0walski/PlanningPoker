@@ -7386,6 +7386,10 @@ react-icons@^3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-3.2.0.tgz#fc1bf36cb4d231d61d1aa1de3a6ba773d07e47d2"
 
+react-onclickoutside@^6.7.1:
+  version "6.7.1"
+  resolved "https://registry.yarnpkg.com/react-onclickoutside/-/react-onclickoutside-6.7.1.tgz#6a5b5b8b4eae6b776259712c89c8a2b36b17be93"
+
 react-redux@^5.0.7:
   version "5.0.7"
   resolved "http://registry.npmjs.org/react-redux/-/react-redux-5.0.7.tgz#0dc1076d9afb4670f993ffaef44b8f8c1155a4c8"
