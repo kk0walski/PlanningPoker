@@ -6,11 +6,47 @@ import Home from "./Components/Home";
 import BoardContainer from "./Components/BoardContainer";
 import LandingPage from "./Components/LandingPage";
 import Profile from "./Components/Profile";
+import { justAddBoard, justRemoveBoard } from "./actions/Board";
+import db from "./firebase/firebase";
 
 class App extends Component {
   static propTypes = {
     user: PropTypes.object
   };
+
+  componentDidUpdate(prevProps) {
+    if (this.props.user) {
+      if (
+        (!prevProps.user && this.props.user) ||
+        this.props.user.uid !== prevProps.user.uid
+      ) {
+        const { user } = this.props;
+        this.boards = db
+          .collection("boards")
+          .where("users", "array-contains", user.uid.toString())
+          .onSnapshot(querySnapchot => {
+            querySnapchot.docChanges().forEach(change => {
+              if (change.type === "added") {
+                this.props.justAddBoard(change.doc.data());
+              }
+              if (change.type === "modified") {
+                this.props.justAddBoard(change.doc.data());
+              }
+              if (change.type === "removed") {
+                this.props.justRemoveBoard(change.doc.data().id);
+                console.log("Removed board: ", change.doc.data().id);
+              }
+            });
+          });
+      }
+    } else {
+      this.boards();
+    }
+  }
+
+  componentWillUnmount() {
+    this.boards();
+  }
 
   render() {
     const { user } = this.props;
@@ -40,4 +76,14 @@ const mapStateToProps = state => {
   };
 };
 
-export default withRouter(connect(mapStateToProps)(App));
+const mapDispatchToProps = dispatch => ({
+  justAddBoard: board => dispatch(justAddBoard(board)),
+  justRemoveBoard: boardId => dispatch(justRemoveBoard(boardId))
+});
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(App)
+);

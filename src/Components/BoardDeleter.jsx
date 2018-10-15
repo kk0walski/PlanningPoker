@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { Button, Wrapper, Menu, MenuItem } from "react-aria-menubutton";
 import { FaTrash } from "react-icons/fa";
+import { startRemoveBoard } from "../actions/Board";
 
 class BoardDeleter extends React.Component {
   static propTypes = {
@@ -15,7 +16,7 @@ class BoardDeleter extends React.Component {
   handleSelection = () => {
     const { match, history } = this.props;
     const { boardId } = match.params;
-    //this.props.startRemoveBoard({ boardId });
+    this.props.startRemoveBoard({ boardId });
     history.push("/");
   };
 
@@ -38,4 +39,13 @@ class BoardDeleter extends React.Component {
   );
 }
 
-export default withRouter(connect()(BoardDeleter));
+const mapDispatchToProps = dispatch => ({
+  startRemoveBoard: boardId => dispatch(startRemoveBoard(boardId))
+});
+
+export default withRouter(
+  connect(
+    undefined,
+    mapDispatchToProps
+  )(BoardDeleter)
+);

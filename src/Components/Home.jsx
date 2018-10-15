@@ -8,8 +8,6 @@ import Header from "./Header";
 import BoardAdder from "./BoardAdder";
 import classnames from "classnames";
 import { firebase } from "../firebase/firebase";
-import db from "../firebase/firebase";
-import { justAddBoard, justRemoveBoard } from "../actions/Board";
 
 class Home extends Component {
   static propTypes = {
@@ -22,33 +20,6 @@ class Home extends Component {
     ).isRequired,
     history: PropTypes.object.isRequired
   };
-
-  componentWillMount() {
-    const { user } = this.props;
-    if (user) {
-      this.boards = db
-        .collection("boards")
-        .where("users", "array-contains", user.uid.toString())
-        .onSnapshot(querySnapchot => {
-          querySnapchot.docChanges().forEach(change => {
-            if (change.type === "added") {
-              this.props.justAddBoard(change.doc.data());
-            }
-            if (change.type === "modified") {
-              this.props.justAddBoard(change.doc.data());
-            }
-            if (change.type === "removed") {
-              console.log("Removed board: ", change.doc.data());
-            }
-          });
-        });
-    }
-  }
-
-  componentWillUnmount() {
-    console.log("Listener UnMounting");
-    this.boards();
-  }
 
   render() {
     const { boards, history } = this.props;
@@ -90,12 +61,4 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => ({
-  justAddBoard: board => dispatch(justAddBoard(board)),
-  justRemoveBoard: boardId => dispatch(justRemoveBoard(boardId))
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Home);
+export default connect(mapStateToProps)(Home);

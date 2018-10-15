@@ -30,11 +30,21 @@ export const startAddBoard = (boardData = {}) => {
 
 export const removeBoard = boardId => ({
   type: "DELETE_BOARD",
-  payload: boardId
+  payload: {
+    boardId
+  }
 });
 
 export const justRemoveBoard = boardId => {
   return dispatch => {
     return dispatch(removeBoard(boardId));
+  };
+};
+
+export const startRemoveBoard = ({ boardId } = {}) => {
+  return dispatch => {
+    db.collection("boards")
+      .doc(boardId)
+      .delete();
   };
 };
