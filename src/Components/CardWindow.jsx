@@ -13,8 +13,8 @@ export default class CardDetailModal extends Component {
   };
 
   render() {
-    const { title } = this.props.card;
-    const { listTitle } = this.props;
+    const { title, id } = this.props.card;
+    const { listTitle, boardId } = this.props;
     return (
       <Modal
         isOpen={this.props.isOpen}
@@ -30,7 +30,7 @@ export default class CardDetailModal extends Component {
               <FaRegClipboard className="icon-lg" />
             </span>
             <div className="window-title">
-              <CardTitle cardTitle={title} />
+              <CardTitle cardTitle={title} cardId={id} boardId={boardId} />
             </div>
             <div className="window-header-inline-content">
               <p className={classnames("u-inline-block", "u-bottom")}>

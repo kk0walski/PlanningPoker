@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import ClickOutside from "./ClickOutside";
+import { startChangeCardTitle } from "../actions/Cards";
 
-export default class CardTitle extends Component {
+class CardTitle extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,11 +21,11 @@ export default class CardTitle extends Component {
   };
 
   submitTitle = () => {
-    const { cardTitle } = this.props;
+    const { cardTitle, cardId, boardId } = this.props;
     const { newTitle } = this.state;
     if (newTitle === "") return;
     if (cardTitle !== newTitle) {
-      //this.props.changecardTitle(boardId, newTitle);
+      this.props.startChangeCardTitle(boardId, cardId, newTitle);
     }
     this.setState({ isOpen: false });
   };
@@ -69,3 +71,13 @@ export default class CardTitle extends Component {
     );
   }
 }
+
+const mapDispatchToProps = dispatch => ({
+  startChangeCardTitle: (boardId, cardId, cardTitle) =>
+    dispatch(startChangeCardTitle(boardId, cardId, cardTitle))
+});
+
+export default connect(
+  undefined,
+  mapDispatchToProps
+)(CardTitle);

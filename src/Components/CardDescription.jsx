@@ -55,11 +55,11 @@ export default class CardDescription extends Component {
         );
       } else {
         return (
-          <p className="u-bottom" onClick={this.openEditor}>
+          <div className="u-bottom" onClick={this.openEditor}>
             <p className="card-detail-fake-text-area">
               Dodaj bardziej szczegółowy opis...
             </p>
-          </p>
+          </div>
         );
       }
     }
