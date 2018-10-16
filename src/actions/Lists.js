@@ -21,3 +21,14 @@ export const startChangeListName = (boardId, listId, listTitle) => {
       });
   };
 };
+
+export const addCard = card => ({
+  type: "ADD_CARD",
+  payload: card
+});
+
+export const justAddCard = (cardData = {}) => {
+  return dispatch => {
+    return dispatch(addCard(cardData));
+  };
+};

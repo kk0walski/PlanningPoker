@@ -6,6 +6,8 @@ import Header from "./Header";
 import classnames from "classnames";
 import BoardHeader from "./BoardHeader";
 import Lists from "./Lists";
+import db from "../firebase/firebase";
+import { justAddCard } from "../actions/Lists";
 
 class Board extends Component {
   static propTypes = {
@@ -13,6 +15,31 @@ class Board extends Component {
     boardTitle: PropTypes.string.isRequired,
     boardColor: PropTypes.string.isRequired,
     listsOrder: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired
+  };
+
+  componentWillMount = () => {
+    const { boardId } = this.props;
+    this.cards = db
+      .collection("boards")
+      .doc(boardId.toString())
+      .collection("cards")
+      .onSnapshot(querySnapchot => {
+        querySnapchot.docChanges().forEach(change => {
+          if (change.type === "added") {
+            this.props.justAddCard({ ...change.doc.data(), boardId });
+          }
+          if (change.type === "modified") {
+            this.props.justAddCard({ ...change.doc.data(), boardId });
+          }
+          if (change.type === "removed") {
+            console.log("REMOVE CARD: ", change.doc.data());
+          }
+        });
+      });
+  };
+
+  componentWillUnmount = () => {
+    this.cards();
   };
 
   render() {
@@ -44,4 +71,12 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-export default connect(mapStateToProps)(Board);
+const mapDispatchToProps = dispatch => ({
+  justAddCard: cardData => dispatch(justAddCard(cardData))
+  //justRemoveList: (boardId, listId) => dispatch(justRemoveList(boardId, listId))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Board);
