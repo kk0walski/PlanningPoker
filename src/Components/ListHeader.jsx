@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Button, Wrapper, Menu, MenuItem } from "react-aria-menubutton";
 import { FaArchive } from "react-icons/fa";
 // import { startChangeListName } from '../actions/List';
-// import { startRemoveList } from '../actions/Board';
+import { startRemoveList } from "../actions/Board";
 
 class ListHeader extends Component {
   constructor(props) {
@@ -43,9 +43,12 @@ class ListHeader extends Component {
   };
 
   deleteList = () => {
-    const { listId, listsOrder, list, cards, boardId } = this.props;
-    const listCards = list.cards.map(cardId => cards[cardId]);
-    //this.props.startRemoveList(boardId, listId, listsOrder, listCards)
+    const { listId, boardId } = this.props;
+    const listData = {
+      listId,
+      boardId
+    };
+    this.props.startRemoveList(listData);
   };
 
   openTitleEditor = () => {
@@ -118,9 +121,12 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-// const mapDispatchToProps = (dispatch) => ({
-//   startChangeListName: (boardId, listId, listTitle) => dispatch(startChangeListName(boardId, listId, listTitle)),
-//   startRemoveList: (boardId, myLists, listId, listCards) => dispatch(startRemoveList(boardId, myLists, listId, listCards))
-// });
+const mapDispatchToProps = dispatch => ({
+  //startChangeListName: (boardId, listId, listTitle) => dispatch(startChangeListName(boardId, listId, listTitle)),
+  startRemoveList: listData => dispatch(startRemoveList(listData))
+});
 
-export default connect(mapStateToProps)(ListHeader);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ListHeader);

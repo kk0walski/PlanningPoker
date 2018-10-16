@@ -60,14 +60,7 @@ const Board = (state = [], action) => {
         ...state,
         [boardId]: {
           ...state[boardId],
-          lists: state[boardId].lists.filter(listId => listId !== newListId),
-          archive: {
-            ...state[boardId].archive,
-            lists: {
-              ...state[boardId].archive.lists,
-              newListId
-            }
-          }
+          lists: state[boardId].lists.filter(listId => listId !== newListId)
         }
       };
     }
