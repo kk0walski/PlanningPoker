@@ -162,3 +162,32 @@ export const startRemoveList = ({ boardId, listId } = {}) => {
     });
   };
 };
+
+export const setLists = listsData => ({
+  type: "SET_LISTS",
+  payload: listsData
+});
+
+export const startMoveList = (listsData = {}) => {
+  return dispatch => {
+    const { oldListIndex, newListIndex, boardId, myLists } = listsData;
+    const boardRef = db.collection("boards").doc(boardId.toString());
+
+    return db.runTransaction(transaction => {
+      return transaction.get(boardRef).then(boardDoc => {
+        if (!boardDoc.exists) {
+          throw "Document does not exist!";
+        }
+        const databaseLists = boardDoc.data().lists;
+        if (JSON.stringify(databaseLists) === JSON.stringify(myLists)) {
+          const newLists = myLists;
+          const [removedList] = newLists.splice(oldListIndex, 1);
+          newLists.splice(newListIndex, 0, removedList);
+          transaction.update(boardRef, { lists: newLists });
+        } else {
+          throw "Lists not match";
+        }
+      });
+    });
+  };
+};

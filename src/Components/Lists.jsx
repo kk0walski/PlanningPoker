@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import List from "./List";
 import ListAdder from "./ListAdder";
+import { startMoveList } from "../actions/Board";
 
 class InnerList extends React.PureComponent {
   render() {
@@ -65,14 +66,12 @@ class Lists extends Component {
         sourceListId: source.droppableId,
         destListId: destination.droppableId
       };
-      this.props.startMoveCard(lists, cardsData);
+      //this.props.startMoveCard(lists, cardsData);
     }
   };
 
   render() {
     const { boardId, listsOrder, lists, cards } = this.props;
-    console.log("LISTY: ", lists);
-    console.log("cards: ", cards);
     return (
       <DragDropContext onDragEnd={this.handleDragEnd}>
         <Droppable droppableId={boardId} direction="horizontal" type="COLUMN">
@@ -123,4 +122,12 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-export default connect(mapStateToProps)(Lists);
+const mapDispatchToProps = dispatch => ({
+  startMoveList: listsData => dispatch(startMoveList(listsData))
+  //startMoveCard: (lists, cardData) => dispatch(startMoveCard(lists, cardData))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Lists);
