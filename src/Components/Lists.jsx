@@ -39,7 +39,7 @@ class Lists extends Component {
     if (!destination) {
       return;
     }
-    const { listsOrder, lists, boardId } = this.props;
+    const { listsOrder /*boardId*/ } = this.props;
     //Move List
     if (type === "COLUMN") {
       // Prevent update if nothing has changed
@@ -59,13 +59,13 @@ class Lists extends Component {
       source.index !== destination.index ||
       source.droppableId !== destination.droppableId
     ) {
-      const cardsData = {
-        boardId,
-        oldCardIndex: source.index,
-        newCardIndex: destination.index,
-        sourceListId: source.droppableId,
-        destListId: destination.droppableId
-      };
+      // const cardsData = {
+      //   boardId,
+      //   oldCardIndex: source.index,
+      //   newCardIndex: destination.index,
+      //   sourceListId: source.droppableId,
+      //   destListId: destination.droppableId
+      // };
       //this.props.startMoveCard(lists, cardsData);
     }
   };

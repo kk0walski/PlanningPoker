@@ -37,7 +37,7 @@ class CardAdder extends Component {
   handleSubmit = event => {
     event.preventDefault();
     const { newText } = this.state;
-    const { list, boardId } = this.props;
+    //const { list, boardId } = this.props;
     if (newText === "") return;
     //this.props.startAddCard(boardId, list, newText);
     this.toggleCardComposer();
