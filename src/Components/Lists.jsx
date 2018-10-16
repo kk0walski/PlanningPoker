@@ -5,6 +5,7 @@ import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import List from "./List";
 import ListAdder from "./ListAdder";
 import { startMoveList } from "../actions/Board";
+import { startMoveCard } from "../actions/Lists";
 
 class InnerList extends React.PureComponent {
   render() {
@@ -39,7 +40,7 @@ class Lists extends Component {
     if (!destination) {
       return;
     }
-    const { listsOrder /*boardId*/ } = this.props;
+    const { listsOrder, lists, boardId } = this.props;
     //Move List
     if (type === "COLUMN") {
       // Prevent update if nothing has changed
@@ -59,14 +60,14 @@ class Lists extends Component {
       source.index !== destination.index ||
       source.droppableId !== destination.droppableId
     ) {
-      // const cardsData = {
-      //   boardId,
-      //   oldCardIndex: source.index,
-      //   newCardIndex: destination.index,
-      //   sourceListId: source.droppableId,
-      //   destListId: destination.droppableId
-      // };
-      //this.props.startMoveCard(lists, cardsData);
+      const cardsData = {
+        boardId,
+        oldCardIndex: source.index,
+        newCardIndex: destination.index,
+        sourceListId: source.droppableId,
+        destListId: destination.droppableId
+      };
+      this.props.startMoveCard(lists, cardsData);
     }
   };
 
@@ -123,8 +124,8 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  startMoveList: listsData => dispatch(startMoveList(listsData))
-  //startMoveCard: (lists, cardData) => dispatch(startMoveCard(lists, cardData))
+  startMoveList: listsData => dispatch(startMoveList(listsData)),
+  startMoveCard: (lists, cardData) => dispatch(startMoveCard(lists, cardData))
 });
 
 export default connect(
