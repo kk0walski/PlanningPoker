@@ -8,7 +8,12 @@ import ListAdder from "./ListAdder";
 class InnerList extends React.PureComponent {
   render() {
     const { list, cardMap, boardId, listsOrder, index } = this.props;
-    const cards = list.cards.map(cardId => cardMap[cardId]);
+    var cards;
+    if (cardMap) {
+      cards = list.cards.map(cardId => cardMap[cardId]);
+    } else {
+      cards = [];
+    }
     return (
       <List
         key={list.id}
