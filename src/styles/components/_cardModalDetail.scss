@@ -1,0 +1,248 @@
+.window-overlay {
+  align-items: flex-start;
+  background-color: rgba(0, 0, 0, 0.64);
+  height: 100%;
+  justify-content: center;
+  left: 0;
+  overflow-y: auto;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 20;
+}
+
+.window {
+  background-color: #ebeef0;
+  border-radius: 2px;
+  margin: 48px auto 80px;
+  overflow: hidden;
+  position: relative;
+  max-width: 768px;
+  z-index: 25;
+}
+
+.window-up .window-overlay {
+  display: flex;
+}
+
+@media only screen and (max-width: 1280px) and (min-width: 901px),
+  only screen and (min-width: 1281px) {
+  .window-overlay {
+    overflow-x: hidden;
+  }
+}
+
+.x {
+  display: block;
+  position: absolute;
+  cursor: pointer;
+  right: -30px;
+  top: -20px;
+  width: 32px;
+  height: 32px;
+  transition: transform 0.25s ease-in-out;
+}
+.x:hover {
+  transform: rotate(180deg);
+}
+.x:before {
+  content: "";
+  position: absolute;
+  display: block;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 32px;
+  height: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.5);
+  transform: rotate(45deg);
+  transform-origin: center;
+}
+.x:after {
+  content: "";
+  position: absolute;
+  display: block;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 32px;
+  height: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.5);
+  transform: rotate(-45deg);
+  transform-origin: center;
+}
+
+.window-header-icon {
+  left: -40px;
+  position: absolute;
+  top: 4px;
+}
+
+.icon-lg,
+.icon-sm {
+  color: #798d99;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: inline-block;
+  font-family: trellicons;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1;
+  text-align: center;
+  text-decoration: none;
+}
+
+.icon-lg {
+  height: 20px;
+  font-size: 16px;
+  line-height: 32px;
+  width: 32px;
+}
+
+.icon-x-lg {
+  height: 46px;
+  font-size: 16px;
+  line-height: 32px;
+  width: 32px;
+  cursor: pointer;
+}
+
+.window-title {
+  margin: 4px 0 0;
+}
+
+.window-header {
+  margin: 12px 40px 8px 56px;
+  min-height: 32px;
+  position: relative;
+  z-index: 1;
+}
+.card-title-button {
+  background-color: inherit;
+  width: 100%;
+  text-align: left;
+}
+
+.mod-card-back-title {
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  box-shadow: none;
+  font-size: 20px;
+  font-weight: 700;
+  height: 24px;
+  line-height: 24px;
+  margin: 0px;
+  min-height: 24px;
+  padding: 4px;
+  resize: none;
+  width: 95%;
+}
+
+.window-header-inline-content {
+  cursor: default;
+  display: inline-block;
+  margin: 4px 8px 4px 2px;
+}
+
+.u-inline-block {
+  display: inline-block;
+}
+
+.u-bottom {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.window-main-col {
+  float: left;
+  overflow-x: hidden;
+  overflow-y: auto;
+  min-height: 24px;
+  position: relative;
+  width: 552px;
+  z-index: 0;
+  margin: 0px;
+  padding: 0px 8px 8px 16px;
+}
+
+.window-sidebar {
+  float: right;
+  width: 168px;
+  z-index: 10;
+  padding: 8px 16px 8px 8px;
+  overflow: hidden;
+}
+
+.window-module {
+  clear: both;
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.window-module-title {
+  position: relative;
+  border-bottom: 1px solid rgba(9, 45, 66, 0.13);
+  padding: 2px 0px;
+  margin: 0px 0px 4px 40px;
+}
+
+.window-module-title-no-divider {
+  border-bottom: none;
+}
+
+.window-module-title h3 {
+  display: inline-block;
+  width: auto;
+  min-height: 18px;
+  min-width: 40px;
+  margin: 0px;
+}
+
+.window-module-title-icon {
+  left: -40px;
+  position: absolute;
+  top: 2px;
+}
+
+.card-detail-fake-text-area {
+  background-color: rgba(9, 45, 66, 0.08);
+  border-radius: 3px;
+  color: #6b808c;
+  display: block;
+  min-height: 40px;
+  padding: 7px 9px;
+  text-decoration: none;
+  margin-top: 15px;
+}
+
+.edit-controls {
+  clear: both;
+  margin-top: 8px;
+}
+
+.u-clearfix {
+  clear: both;
+  content: "";
+  display: table;
+}
+
+.button.primary,
+button.primary,
+input[type="button"].primary,
+input[type="submit"].primary {
+  background-color: #5aac44;
+  box-shadow: 0 1px 0 0 #3f6f21;
+  border: none;
+  color: #fff;
+}
+
+input.mod-submit-edit {
+  float: left;
+}
