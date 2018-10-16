@@ -3,7 +3,7 @@ import Textarea from "react-textarea-autosize";
 import { connect } from "react-redux";
 import { Button, Wrapper, Menu, MenuItem } from "react-aria-menubutton";
 import { FaArchive } from "react-icons/fa";
-// import { startChangeListName } from '../actions/List';
+import { startChangeListName } from "../actions/Lists";
 import { startRemoveList } from "../actions/Board";
 
 class ListHeader extends Component {
@@ -33,7 +33,7 @@ class ListHeader extends Component {
     const { listTitle, listId, boardId } = this.props;
     if (newTitle === "") return;
     if (newTitle !== listTitle) {
-      //this.props.startChangeListName(boardId, listId, newTitle);
+      this.props.startChangeListName(boardId, listId, newTitle);
     }
     this.setState({ isOpen: false });
   };
@@ -122,7 +122,8 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  //startChangeListName: (boardId, listId, listTitle) => dispatch(startChangeListName(boardId, listId, listTitle)),
+  startChangeListName: (boardId, listId, listTitle) =>
+    dispatch(startChangeListName(boardId, listId, listTitle)),
   startRemoveList: listData => dispatch(startRemoveList(listData))
 });
 
