@@ -16,7 +16,6 @@ class BoardContainer extends Component {
 
   componentWillMount = () => {
     const { boardId } = this.props;
-    console.log("SŁUCHANIE LIST");
     this.lists = db
       .collection("boards")
       .doc(boardId.toString())

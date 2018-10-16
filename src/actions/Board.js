@@ -149,3 +149,21 @@ export const justRemoveList = (boardId, listId) => {
     return dispatch(deleteList(boardId, listId));
   };
 };
+
+export const startRemoveList = ({ boardId, listId } = {}) => {
+  return dispatch => {
+    const boardRef = db.collection("boards").doc(boardId);
+
+    boardRef
+      .update({
+        lists: firebase.firestore.FieldValue.arrayRemove(listId.toString())
+      })
+      .then(() => {
+        db.collection("boards")
+          .doc(boardId)
+          .collection("lists")
+          .doc(listId)
+          .delete();
+      });
+  };
+};
