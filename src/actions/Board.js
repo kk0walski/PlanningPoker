@@ -59,3 +59,24 @@ export const startRemoveBoard = ({ boardId } = {}) => {
       .delete();
   };
 };
+
+export const changeBoardColor = (boardId, color) => ({
+  type: "CHANGE_BOARD_COLOR",
+  payload: {
+    boardId,
+    color
+  }
+});
+
+export const startChangeBoardColor = (boardId, color) => {
+  return dispatch => {
+    db.collection("boards")
+      .doc(boardId)
+      .update({
+        color: color
+      })
+      .then(() => {
+        dispatch(changeBoardColor(boardId, color));
+      });
+  };
+};

@@ -6,6 +6,7 @@ import { Button, Wrapper, Menu, MenuItem } from "react-aria-menubutton";
 import { FaCheck } from "react-icons/fa";
 import colorIcon from "../assets/images/color-icon.png";
 import classnames from "classnames";
+import { startChangeBoardColor } from "../actions/Board";
 
 class ColorPicker extends React.Component {
   static propTypes = {
@@ -17,7 +18,7 @@ class ColorPicker extends React.Component {
     const { boardId, boardColor } = this.props;
     // Dispatch update only if selected color is not the same as current board color.
     if (color !== boardColor) {
-      //this.props.startChangeBoardColor(boardId, color);
+      this.props.startChangeBoardColor(boardId, color);
     }
   };
 
@@ -59,4 +60,14 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-export default withRouter(connect(mapStateToProps)(ColorPicker));
+const mapDispatchToProps = dispatch => ({
+  startChangeBoardColor: (boardId, color) =>
+    dispatch(startChangeBoardColor(boardId, color))
+});
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(ColorPicker)
+);
