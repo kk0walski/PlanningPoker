@@ -176,7 +176,7 @@ export const startMoveList = (listsData = {}) => {
     return db.runTransaction(transaction => {
       return transaction.get(boardRef).then(boardDoc => {
         if (!boardDoc.exists) {
-          throw "Document does not exist!";
+          throw new Error("Document does not exist!");
         }
         const databaseLists = boardDoc.data().lists;
         if (JSON.stringify(databaseLists) === JSON.stringify(myLists)) {
@@ -185,7 +185,7 @@ export const startMoveList = (listsData = {}) => {
           newLists.splice(newListIndex, 0, removedList);
           transaction.update(boardRef, { lists: newLists });
         } else {
-          throw "Lists not match";
+          throw new Error("Lists not match");
         }
       });
     });
