@@ -69,7 +69,7 @@ class CardModal extends Component {
       isLabelPickerOpen,
       isTextareaFocused
     } = this.state;
-    const { cardElement, card, labels, listId, boardId, isOpen } = this.props;
+    const { cardElement, card, listId, boardId, isOpen } = this.props;
     if (!cardElement) {
       return null;
     }
