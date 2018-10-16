@@ -43,7 +43,9 @@ class App extends Component {
           });
       }
     } else {
-      this.boards();
+      if (this.boards) {
+        this.boards();
+      }
     }
   }
 

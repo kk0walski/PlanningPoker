@@ -15,14 +15,12 @@ const Board = (state = [], action) => {
       };
     }
     case "SET_LISTS": {
-      const { boardId, listsOrder, listsKey } = action.payload;
-      console.log("REDUCER SETTING LISTS: ", action.payload);
+      const { boardId, listsOrder } = action.payload;
       return {
         ...state,
         [boardId]: {
           ...state[boardId],
-          lists: listsOrder,
-          listsKey
+          lists: listsOrder
         }
       };
     }
