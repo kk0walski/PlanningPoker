@@ -1,6 +1,6 @@
 import React from "react";
 import Textarea from "react-textarea-autosize";
-//import { startAddList } from '../actions/Board';
+import { startAddList } from "../actions/Board";
 import { connect } from "react-redux";
 
 class ListAdder extends React.Component {
@@ -29,7 +29,7 @@ class ListAdder extends React.Component {
     const { boardId, listsOrder } = this.props;
     const { listTitle } = this.state;
     if (listTitle === "") return;
-    //this.props.startAddList(boardId, listsOrder, listTitle)
+    this.props.startAddList(boardId, listsOrder, listTitle);
     this.setState({ isOpen: false, listTitle: "" });
   };
   render = () => {
@@ -69,8 +69,12 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-// const mapDispatchToProps = (dispatch) => ({
-//   startAddList: (boardId, listsKey, listTitle) => dispatch(startAddList(boardId, listsKey, listTitle))
-// });
+const mapDispatchToProps = dispatch => ({
+  startAddList: (boardId, listsKey, listTitle) =>
+    dispatch(startAddList(boardId, listsKey, listTitle))
+});
 
-export default connect(mapStateToProps)(ListAdder);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ListAdder);

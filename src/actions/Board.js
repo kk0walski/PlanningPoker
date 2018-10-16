@@ -1,4 +1,5 @@
 import db from "../firebase/firebase";
+import { firebase } from "../firebase/firebase";
 
 export const addBoard = board => ({
   type: "ADD_BOARD",
@@ -99,5 +100,36 @@ export const startChangeBoardColor = (boardId, color) => {
       .then(() => {
         dispatch(changeBoardColor(boardId, color));
       });
+  };
+};
+
+export const addList = list => ({
+  type: "ADD_LIST",
+  payload: list
+});
+
+export const startAddList = (boardId, listTitle) => {
+  return dispatch => {
+    const boardRef = db.collection("boards").doc(boardId);
+    const ref = db
+      .collection("boards")
+      .doc(boardId)
+      .collection("lists")
+      .doc();
+    const key = ref.id;
+    const list = {
+      id: key,
+      title: listTitle,
+      cards: []
+    };
+    ref.set(list).then(() => {
+      boardRef
+        .update({
+          lists: firebase.firestore.FieldValue.arrayUnion(key.toString())
+        })
+        .then(() => {
+          dispatch(addList({ ...list, boardId }));
+        });
+    });
   };
 };
