@@ -60,6 +60,27 @@ export const startRemoveBoard = ({ boardId } = {}) => {
   };
 };
 
+export const changeBoardTitle = (boardId, title) => ({
+  type: "CHANGE_BOARD_TITLE",
+  payload: {
+    boardTitle: title,
+    boardId
+  }
+});
+
+export const startChangeBoardTitle = (boardId, title) => {
+  return dispatch => {
+    db.collection("boards")
+      .doc(boardId.toString())
+      .update({
+        title
+      })
+      .then(() => {
+        dispatch(changeBoardTitle(boardId, title));
+      });
+  };
+};
+
 export const changeBoardColor = (boardId, color) => ({
   type: "CHANGE_BOARD_COLOR",
   payload: {
@@ -71,9 +92,9 @@ export const changeBoardColor = (boardId, color) => ({
 export const startChangeBoardColor = (boardId, color) => {
   return dispatch => {
     db.collection("boards")
-      .doc(boardId)
+      .doc(boardId.toString())
       .update({
-        color: color
+        color
       })
       .then(() => {
         dispatch(changeBoardColor(boardId, color));

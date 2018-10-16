@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import { startChangeBoardTitle } from "../actions/Board";
 
 class BoardTitle extends React.Component {
   static propTypes = {
@@ -30,7 +31,7 @@ class BoardTitle extends React.Component {
     const { newTitle } = this.state;
     if (newTitle === "") return;
     if (boardTitle !== newTitle) {
-      //this.props.startChangeBoardTitle(boardId, newTitle);
+      this.props.startChangeBoardTitle(boardId, newTitle);
     }
     this.setState({ isOpen: false });
   };
@@ -83,4 +84,14 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-export default withRouter(connect(mapStateToProps)(BoardTitle));
+const mapDispatchToProps = dispatch => ({
+  startChangeBoardTitle: (boardId, title) =>
+    dispatch(startChangeBoardTitle(boardId, title))
+});
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(BoardTitle)
+);
