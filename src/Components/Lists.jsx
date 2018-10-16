@@ -66,6 +66,8 @@ class Lists extends Component {
 
   render() {
     const { boardId, listsOrder, lists, cards } = this.props;
+    console.log("LISTY: ", lists);
+    console.log("cards: ", cards);
     return (
       <DragDropContext onDragEnd={this.handleDragEnd}>
         <Droppable droppableId={boardId} direction="horizontal" type="COLUMN">
@@ -78,7 +80,6 @@ class Lists extends Component {
               >
                 {listsOrder &&
                   lists &&
-                  cards &&
                   listsOrder.map((listId, index) => {
                     const list = lists[listId];
                     if (list) {

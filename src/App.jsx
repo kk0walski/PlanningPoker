@@ -37,7 +37,6 @@ class App extends Component {
               }
               if (change.type === "removed") {
                 this.props.justRemoveBoard(change.doc.data().id);
-                console.log("Removed board: ", change.doc.data().id);
               }
             });
           });

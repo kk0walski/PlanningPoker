@@ -26,10 +26,10 @@ class ListAdder extends React.Component {
     }
   };
   handleSubmit = () => {
-    const { boardId, listsOrder } = this.props;
+    const { boardId } = this.props;
     const { listTitle } = this.state;
     if (listTitle === "") return;
-    this.props.startAddList(boardId, listsOrder, listTitle);
+    this.props.startAddList(boardId, listTitle);
     this.setState({ isOpen: false, listTitle: "" });
   };
   render = () => {

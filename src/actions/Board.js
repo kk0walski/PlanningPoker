@@ -108,6 +108,12 @@ export const addList = list => ({
   payload: list
 });
 
+export const justAddList = (listData = {}) => {
+  return dispatch => {
+    return dispatch(addList(listData));
+  };
+};
+
 export const startAddList = (boardId, listTitle) => {
   return dispatch => {
     const boardRef = db.collection("boards").doc(boardId);
@@ -123,13 +129,23 @@ export const startAddList = (boardId, listTitle) => {
       cards: []
     };
     ref.set(list).then(() => {
-      boardRef
-        .update({
-          lists: firebase.firestore.FieldValue.arrayUnion(key.toString())
-        })
-        .then(() => {
-          dispatch(addList({ ...list, boardId }));
-        });
+      boardRef.update({
+        lists: firebase.firestore.FieldValue.arrayUnion(key.toString())
+      });
     });
+  };
+};
+
+export const deleteList = (boardId, listId) => ({
+  type: "DELETE_LIST",
+  payload: {
+    boardId,
+    listId
+  }
+});
+
+export const justRemoveList = (boardId, listId) => {
+  return dispatch => {
+    return dispatch(deleteList(boardId, listId));
   };
 };
