@@ -1,0 +1,92 @@
+@import "../base/settings";
+
+.list-card {
+  background-color: #fff;
+  border-radius: 3px;
+  box-shadow: 0 1px 0 rgba(9, 45, 66, 0.25);
+  display: block;
+  margin: 8px 5px 0 5px;
+  max-width: 300px;
+  min-height: 30px;
+  position: relative;
+  text-decoration: none;
+  z-index: 0;
+}
+
+.list-card-operation {
+  background-color: #f5f6f7;
+  background-clip: padding-box;
+  background-origin: padding-box;
+  border-radius: 3px;
+  opacity: 0.8;
+  padding: 4px;
+  position: absolute;
+  cursor: pointer;
+  right: 2px;
+  top: 2px;
+  visibility: hidden;
+  z-index: 40;
+}
+
+.icon-sm {
+  height: 12px;
+  font-size: 12px;
+  line-height: 20px;
+  width: 12px;
+}
+
+.list-card.list-card.active-card .list-card-operation {
+  visibility: visible;
+}
+
+.list-card.active-card {
+  background-color: #f5f6f7;
+  border-bottom-color: rgba(9, 45, 66, 0.25);
+}
+
+.card-title:focus {
+  box-shadow: 0px 0px 1px 3px rgb(0, 180, 255);
+}
+
+.card-title--drag {
+  box-shadow: 1px 9px 8px 1px rgba(0, 0, 0, 0.3) !important;
+  opacity: 1 !important;
+}
+
+.card-title-html {
+  padding: 6px 8px;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 8px 0;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  p {
+    margin: 4px 0;
+  }
+
+  code,
+  pre {
+    white-space: pre-wrap;
+  }
+
+  pre {
+    margin: 4px 0;
+    padding: 4px 2px;
+    background: rgba(100, 100, 100, 0.08);
+  }
+}
+
+.list-card-labels {
+  margin: 2px 0;
+  overflow: auto;
+  position: relative;
+}
