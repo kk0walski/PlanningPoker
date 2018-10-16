@@ -17,6 +17,7 @@ export const startAddBoard = (boardData = {}) => {
     const {
       title = "",
       lists = [],
+      archuveLists = [],
       users = [],
       user = {},
       color = "blue"
@@ -28,6 +29,7 @@ export const startAddBoard = (boardData = {}) => {
       id: key,
       title,
       lists,
+      archuveLists,
       users,
       color
     };
@@ -155,7 +157,8 @@ export const startRemoveList = ({ boardId, listId } = {}) => {
     const boardRef = db.collection("boards").doc(boardId);
 
     boardRef.update({
-      lists: firebase.firestore.FieldValue.arrayRemove(listId.toString())
+      lists: firebase.firestore.FieldValue.arrayRemove(listId.toString()),
+      archuveLists: firebase.firestore.FieldValue.arrayUnion(listId.toString())
     });
   };
 };

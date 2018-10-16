@@ -1,13 +1,21 @@
 const Board = (state = [], action) => {
   switch (action.type) {
     case "ADD_BOARD": {
-      const { id, title, lists, users, color = "blue" } = action.payload;
+      const {
+        id,
+        title,
+        lists,
+        archuveLists = [],
+        users,
+        color = "blue"
+      } = action.payload;
       return {
         ...state,
         [id]: {
           id,
           title,
           lists,
+          archuveLists,
           users,
           color,
           archive: {}
@@ -60,7 +68,8 @@ const Board = (state = [], action) => {
         ...state,
         [boardId]: {
           ...state[boardId],
-          lists: state[boardId].lists.filter(listId => listId !== newListId)
+          lists: state[boardId].lists.filter(listId => listId !== newListId),
+          archuveLists: [...state.archuveLists, newListId]
         }
       };
     }
