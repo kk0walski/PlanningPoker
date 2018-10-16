@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Textarea from "react-textarea-autosize";
 import ClickOutside from "./ClickOutside";
-//import { startAddCard } from '../actions/List';
+import { startAddCard } from "../actions/Lists";
 
 class CardAdder extends Component {
   static propTypes = {
@@ -37,9 +37,9 @@ class CardAdder extends Component {
   handleSubmit = event => {
     event.preventDefault();
     const { newText } = this.state;
-    //const { list, boardId } = this.props;
+    const { list, boardId } = this.props;
     if (newText === "") return;
-    //this.props.startAddCard(boardId, list, newText);
+    this.props.startAddCard(boardId, list, newText);
     this.toggleCardComposer();
     this.setState({ newText: "" });
   };
@@ -82,8 +82,12 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-// const mapDispatchToProps = (dispatch) => ({
-//   startAddCard: (boardId, list, newText) => dispatch(startAddCard(boardId, list, newText))
-// });
+const mapDispatchToProps = dispatch => ({
+  startAddCard: (boardId, list, newText) =>
+    dispatch(startAddCard(boardId, list, newText))
+});
 
-export default connect(mapStateToProps)(CardAdder);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CardAdder);
