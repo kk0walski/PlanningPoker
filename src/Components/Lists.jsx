@@ -87,7 +87,6 @@ class Lists extends Component {
                   lists &&
                   listsOrder.map((listId, index) => {
                     const list = lists[listId];
-                    console.log("LISTA: ", list);
                     if (list) {
                       if (list.visible) {
                         return (
