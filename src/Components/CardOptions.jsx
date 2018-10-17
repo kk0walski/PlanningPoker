@@ -62,6 +62,7 @@ class CardOptions extends Component {
       isColorPickerOpen,
       toggleColorPicker,
       card,
+      boardId,
       isThinDisplay,
       boundingRect
     } = this.props;
@@ -151,8 +152,9 @@ class CardOptions extends Component {
           style={isThinDisplay ? calendarMobileStyle : calendarStyle}
         >
           <Calendar
-            cardId={card._id}
+            cardId={card.id}
             date={card.date}
+            boardId={boardId}
             toggleCalendar={this.toggleCalendar}
           />
         </Modal>

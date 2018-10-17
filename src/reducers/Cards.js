@@ -6,6 +6,7 @@ const Cards = (state = {}, action) => {
         listId,
         id,
         title,
+        date,
         description,
         visible
       } = action.payload;
@@ -17,6 +18,7 @@ const Cards = (state = {}, action) => {
             id,
             listId,
             title,
+            date,
             description,
             visible
           }

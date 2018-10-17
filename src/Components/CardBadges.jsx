@@ -54,20 +54,25 @@ class CardBadges extends React.Component {
 
   // Render badge showing amoung of checkboxes that are checked
   renderTaskProgress = () => {
-    const { total, checked } = this.props.checkboxes;
-    if (total === 0) {
-      return null;
+    const { checkboxes } = this.props;
+    if (checkboxes) {
+      const { total, checked } = checkboxes;
+      if (total === 0) {
+        return null;
+      }
+      return (
+        <div
+          className="badge"
+          style={{ background: checked === total ? "green" : "#444" }}
+        >
+          <FaCheckSquare className="badge-icon" />
+          &nbsp;
+          {checked}/{total}
+        </div>
+      );
+    } else {
+      return;
     }
-    return (
-      <div
-        className="badge"
-        style={{ background: checked === total ? "green" : "#444" }}
-      >
-        <FaCheckSquare className="badge-icon" />
-        &nbsp;
-        {checked}/{total}
-      </div>
-    );
   };
 
   render() {
