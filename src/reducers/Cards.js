@@ -1,7 +1,14 @@
 const Cards = (state = {}, action) => {
   switch (action.type) {
     case "ADD_CARD": {
-      const { boardId, listId, id, title, description } = action.payload;
+      const {
+        boardId,
+        listId,
+        id,
+        title,
+        description,
+        visible
+      } = action.payload;
       return {
         ...state,
         [boardId]: {
@@ -10,7 +17,21 @@ const Cards = (state = {}, action) => {
             id,
             listId,
             title,
-            description
+            description,
+            visible
+          }
+        }
+      };
+    }
+    case "ARCHIVE_CARD": {
+      const { boardId, cardId } = action.payload;
+      return {
+        ...state,
+        [boardId]: {
+          ...state[boardId],
+          [cardId]: {
+            ...state[boardId][cardId],
+            visible: false
           }
         }
       };

@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Modal from "react-modal";
-import FaTrash from "react-icons/lib/fa/trash";
-import MdAlarm from "react-icons/lib/md/access-alarm";
+import { FaArchive } from "react-icons/fa";
+import { MdAccessAlarm } from "react-icons/md";
 import Calendar from "./Calendar";
 import ClickOutside from "./ClickOutside";
 import colorIcon from "../assets/images/color-icon.png";
+import { startChangeCardColor, startArchiveCard } from "../actions/Cards";
 
 class CardOptions extends Component {
   static propTypes = {
@@ -16,8 +17,7 @@ class CardOptions extends Component {
     isCardNearRightBorder: PropTypes.bool.isRequired,
     isThinDisplay: PropTypes.bool.isRequired,
     boundingRect: PropTypes.object.isRequired,
-    toggleColorPicker: PropTypes.func.isRequired,
-    dispatch: PropTypes.func.isRequired
+    toggleColorPicker: PropTypes.func.isRequired
   };
 
   constructor() {
@@ -26,20 +26,14 @@ class CardOptions extends Component {
   }
 
   deleteCard = () => {
-    const { dispatch, listId, card } = this.props;
-    dispatch({
-      type: "DELETE_CARD",
-      payload: { cardId: card._id, listId }
-    });
+    const { boardId, card } = this.props;
+    this.props.startArchiveCard(boardId, card.id);
   };
 
   changeColor = color => {
-    const { dispatch, card, toggleColorPicker } = this.props;
+    const { card, boardId, toggleColorPicker } = this.props;
     if (card.color !== color) {
-      dispatch({
-        type: "CHANGE_CARD_COLOR",
-        payload: { color, cardId: card._id }
-      });
+      this.props.startChangeCardColor(boardId, card.id, color);
     }
     toggleColorPicker();
     this.colorPickerButton.focus();
@@ -97,9 +91,9 @@ class CardOptions extends Component {
         <div>
           <button onClick={this.deleteCard} className="options-list-button">
             <div className="modal-icon">
-              <FaTrash />
+              <FaArchive />
             </div>
-            &nbsp;Delete
+            &nbsp;Archive
           </button>
         </div>
         <div className="modal-color-picker-wrapper">
@@ -144,7 +138,7 @@ class CardOptions extends Component {
         <div>
           <button onClick={this.toggleCalendar} className="options-list-button">
             <div className="modal-icon">
-              <MdAlarm />
+              <MdAccessAlarm />
             </div>
             &nbsp;Due date
           </button>
@@ -167,4 +161,14 @@ class CardOptions extends Component {
   }
 }
 
-export default connect()(CardOptions);
+const mapDispatchToProps = dispatch => ({
+  startChangeCardColor: (boardId, cardId, color) =>
+    dispatch(startChangeCardColor(boardId, cardId, color)),
+  startArchiveCard: (boardId, cardId) =>
+    dispatch(startArchiveCard(boardId, cardId))
+});
+
+export default connect(
+  undefined,
+  mapDispatchToProps
+)(CardOptions);

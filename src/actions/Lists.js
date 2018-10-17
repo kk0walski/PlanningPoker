@@ -46,7 +46,8 @@ export const startAddCard = (boardId, list, newTitle) => {
     const card = {
       id: key,
       listId: id,
-      title: newTitle
+      title: newTitle,
+      visible: true
     };
     ref.set(card).then(() => {
       listRef.update({
