@@ -1,13 +1,14 @@
 const Cards = (state = {}, action) => {
   switch (action.type) {
     case "ADD_CARD": {
-      const { boardId, id, title, description } = action.payload;
+      const { boardId, listId, id, title, description } = action.payload;
       return {
         ...state,
         [boardId]: {
           ...state[boardId],
           [id]: {
             id,
+            listId,
             title,
             description
           }

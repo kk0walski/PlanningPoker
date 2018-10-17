@@ -45,6 +45,7 @@ export const startAddCard = (boardId, list, newTitle) => {
     const key = ref.id;
     const card = {
       id: key,
+      listId: id,
       title: newTitle
     };
     ref.set(card).then(() => {
@@ -86,6 +87,13 @@ export const startMoveCard = (lists, cardsData = {}) => {
             transaction.update(listRef, {
               cards: testCards
             });
+            db.collection("boards")
+              .doc(boardId.toString())
+              .collection("cards")
+              .doc(removedCard.toString)
+              .update({
+                listId: destListId
+              });
           } else {
             throw new Error("Cards not match");
           }

@@ -88,17 +88,23 @@ class Lists extends Component {
                   listsOrder.map((listId, index) => {
                     const list = lists[listId];
                     console.log("LISTA: ", list);
-                    if (list && list.visible) {
-                      return (
-                        <InnerList
-                          list={list}
-                          cardMap={cards}
-                          index={index}
-                          boardId={boardId}
-                          listsOrder={listsOrder}
-                          key={list.id}
-                        />
-                      );
+                    if (list) {
+                      if (list.visible) {
+                        return (
+                          <InnerList
+                            list={list}
+                            cardMap={cards}
+                            index={index}
+                            boardId={boardId}
+                            listsOrder={listsOrder}
+                            key={list.id}
+                          />
+                        );
+                      } else {
+                        return null;
+                      }
+                    } else {
+                      return <p>Loading...</p>;
                     }
                   })}
                 {provided.placeholder}
