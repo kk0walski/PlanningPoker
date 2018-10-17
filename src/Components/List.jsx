@@ -9,11 +9,7 @@ class List extends React.Component {
   render = () => {
     const { list, boardId, listsOrder, cards, index } = this.props;
     return (
-      <Draggable
-        draggableId={list.id}
-        index={index}
-        disableInteractiveElementBlocking
-      >
+      <Draggable draggableId={list.id} index={index}>
         {(provided, snapshot) => (
           <div>
             <div
