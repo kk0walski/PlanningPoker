@@ -53,7 +53,7 @@ export default class CardDetailModal extends Component {
                   <h3>Opis</h3>
                 </div>
                 <CardDescription
-                  CardDescription={description}
+                  cardDescription={description}
                   cardId={id}
                   boardId={boardId}
                 />

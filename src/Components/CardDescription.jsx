@@ -1,22 +1,51 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import Markdown from "react-markdown";
 import Textarea from "react-textarea-autosize";
 import classnames from "classnames";
 import ClickOutside from "./ClickOutside";
 import { MdClose } from "react-icons/md";
+import { startChangeCardDescription } from "../actions/Cards";
 
-export default class CardDescription extends Component {
+class CardDescription extends Component {
   constructor() {
     super();
     this.openEditor.bind(this);
     this.state = {
-      newText: "",
+      newText: this.props.cardDescription,
       isOpen: false
     };
   }
 
   openEditor = () => {
     this.setState({ isOpen: !this.state.isOpen });
+  };
+
+  handleChange = event => {
+    this.setState({ newText: event.target.value });
+  };
+
+  handleKeyDown = event => {
+    if (event.keyCode === 13) {
+      this.submitDescription();
+    } else if (event.keyCode === 27) {
+      this.revertDescription();
+    }
+  };
+
+  revertDescription = () => {
+    const { cardDescription } = this.props;
+    this.setState({ newText: cardDescription, isOpen: false });
+  };
+
+  submitDescription = () => {
+    const { boardId, cardId, cardDescription } = this.props;
+    const { newText } = this.state;
+    if (newText === "") return;
+    if (cardDescription !== newText) {
+      this.props.startChangeCardDescription(boardId, cardId, cardDescription);
+    }
+    this.setState({ isOpen: false });
   };
 
   render() {
@@ -65,3 +94,13 @@ export default class CardDescription extends Component {
     }
   }
 }
+
+const mapDispatchToProps = dispatch => ({
+  startChangeCardDescription: (boardId, cardId, cardDescription) =>
+    dispatch(startChangeCardDescription(boardId, cardId, cardDescription))
+});
+
+export default connect(
+  undefined,
+  mapDispatchToProps
+)(CardDescription);

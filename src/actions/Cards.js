@@ -72,3 +72,29 @@ export const startArchiveCard = ({ boardId, cardId } = {}) => {
     });
   };
 };
+
+export const changeCardDescription = (boardId, cardId, cardDescription) => ({
+  type: "CHANGE_CARD_DESCRIPTION",
+  payload: {
+    boardId,
+    cardId,
+    cardDescription
+  }
+});
+
+export const startChangeCardDescription = (
+  boardId,
+  cardId,
+  cardDescription
+) => {
+  return dispatch => {
+    db.collection("boards")
+      .doc(boardId.toString())
+      .collection("cards")
+      .doc(cardId.toString())
+      .update({ description: cardDescription })
+      .then(() => {
+        dispatch(changeCardTitle(boardId, cardId, cardDescription));
+      });
+  };
+};

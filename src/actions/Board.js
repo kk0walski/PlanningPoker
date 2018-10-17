@@ -17,7 +17,6 @@ export const startAddBoard = (boardData = {}) => {
     const {
       title = "",
       lists = [],
-      archuveLists = [],
       users = [],
       user = {},
       color = "blue"
@@ -29,7 +28,6 @@ export const startAddBoard = (boardData = {}) => {
       id: key,
       title,
       lists,
-      archuveLists,
       users,
       color
     };
