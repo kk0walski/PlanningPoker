@@ -5,6 +5,8 @@ import classnames from "classnames";
 import CardModal from "./CardModal";
 import CardDetailModal from "./CardWindow";
 import { FaPencilAlt } from "react-icons/fa";
+import CardBadges from "./CardBadges";
+import { findCheckboxes } from "../utils";
 
 class Card extends Component {
   constructor(props) {
@@ -66,6 +68,7 @@ class Card extends Component {
       isDraggingOver
     } = this.props;
     const { active, isModalOpen, isDetailOpen } = this.state;
+    const checkboxes = findCheckboxes(card.description);
     if (card) {
       return (
         <div>
@@ -109,6 +112,10 @@ class Card extends Component {
                   >
                     {card.title}
                   </div>
+                  {/* eslint-enable */}
+                  {(card.date || checkboxes.total > 0) && (
+                    <CardBadges date={card.date} checkboxes={checkboxes} />
+                  )}
                 </div>
                 {/* Remove placeholder when not dragging over to reduce snapping */}
                 {isDraggingOver && provided.placeholder}
