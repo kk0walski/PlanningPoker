@@ -68,7 +68,8 @@ class Card extends Component {
       isDraggingOver
     } = this.props;
     const { active, isModalOpen, isDetailOpen } = this.state;
-    const checkboxes = findCheckboxes(card.description);
+    const cardDescription = card.description ? card.description : "";
+    const checkboxes = findCheckboxes(cardDescription);
     if (card) {
       return (
         <div>

@@ -15,23 +15,6 @@ const Lists = (state = {}, action) => {
         }
       };
     }
-    case "ADD_CARD": {
-      const { id, boardId, listId } = action.payload;
-      if (listId) {
-        return {
-          ...state,
-          [boardId]: {
-            ...state[boardId],
-            [listId]: {
-              ...state[boardId][listId],
-              cards: [...state[boardId][listId].cards, id]
-            }
-          }
-        };
-      } else {
-        return state;
-      }
-    }
     case "MOVE_CARD": {
       const {
         boardId,

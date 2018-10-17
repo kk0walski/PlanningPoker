@@ -13,7 +13,7 @@ export default class CardDetailModal extends Component {
   };
 
   render() {
-    const { title, id } = this.props.card;
+    const { title, description, id } = this.props.card;
     const { listTitle, boardId } = this.props;
     return (
       <Modal
@@ -52,7 +52,11 @@ export default class CardDetailModal extends Component {
                 <div className="window-title">
                   <h3>Opis</h3>
                 </div>
-                <CardDescription />
+                <CardDescription
+                  CardDescription={description}
+                  cardId={id}
+                  boardId={boardId}
+                />
               </div>
             </div>
           </div>
