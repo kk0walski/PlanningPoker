@@ -59,7 +59,7 @@ export const justArchiveCard = (boardId, cardId) => {
   };
 };
 
-export const startArchiveList = ({ boardId, cardId } = {}) => {
+export const startArchiveCard = ({ boardId, cardId } = {}) => {
   return dispatch => {
     const cardRef = db
       .collection("boards")
