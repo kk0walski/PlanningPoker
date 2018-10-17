@@ -87,13 +87,6 @@ export const startMoveCard = (lists, cardsData = {}) => {
             transaction.update(listRef, {
               cards: testCards
             });
-            db.collection("boards")
-              .doc(boardId.toString())
-              .collection("cards")
-              .doc(removedCard.toString)
-              .update({
-                listId: destListId
-              });
           } else {
             throw new Error("Cards not match");
           }
@@ -130,6 +123,13 @@ export const startMoveCard = (lists, cardsData = {}) => {
                 removedCard.toString()
               )
             });
+            db.collection("boards")
+              .doc(boardId.toString())
+              .collection("cards")
+              .doc(removedCard.toString())
+              .update({
+                listId: destListId
+              });
           } else {
             throw new Error("Cards not match");
           }
