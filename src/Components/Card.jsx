@@ -136,6 +136,7 @@ class Card extends Component {
             card={card}
             listId={listId}
             boardId={boardId}
+            checkboxes={checkboxes}
             toggleCardEditor={this.toggleCardEditor}
           />
           <CardDetailModal

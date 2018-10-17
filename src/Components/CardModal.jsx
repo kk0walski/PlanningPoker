@@ -69,7 +69,14 @@ class CardModal extends Component {
       isLabelPickerOpen,
       isTextareaFocused
     } = this.state;
-    const { cardElement, card, listId, boardId, isOpen } = this.props;
+    const {
+      cardElement,
+      card,
+      listId,
+      boardId,
+      checkboxes,
+      isOpen
+    } = this.props;
     if (!cardElement) {
       return null;
     }
@@ -151,7 +158,16 @@ class CardModal extends Component {
             onFocus={() => this.setState({ isTextareaFocused: true })}
             onBlur={() => this.setState({ isTextareaFocused: false })}
           />
-          {card.date && <CardBadges date={card.date} />}
+          {card.date && (
+            <CardBadges
+              date={
+                card.date.seconds
+                  ? new Date(card.date.seconds * 1000)
+                  : card.date
+              }
+              checkboxes={checkboxes}
+            />
+          )}
         </div>
         <CardOptions
           isColorPickerOpen={isColorPickerOpen}

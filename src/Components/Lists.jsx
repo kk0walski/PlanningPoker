@@ -103,7 +103,7 @@ class Lists extends Component {
                         return null;
                       }
                     } else {
-                      return <p>Loading...</p>;
+                      return <p key={-1}>Loading...</p>;
                     }
                   })}
                 {provided.placeholder}

@@ -12,7 +12,7 @@ import { startChangeCardColor, startArchiveCard } from "../actions/Cards";
 class CardOptions extends Component {
   static propTypes = {
     isColorPickerOpen: PropTypes.bool.isRequired,
-    card: PropTypes.shape({ _id: PropTypes.string.isRequired }).isRequired,
+    card: PropTypes.object.isRequired,
     listId: PropTypes.string.isRequired,
     isCardNearRightBorder: PropTypes.bool.isRequired,
     isThinDisplay: PropTypes.bool.isRequired,
