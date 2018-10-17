@@ -62,17 +62,6 @@ const Board = (state = [], action) => {
         [boardId]: { ...state[boardId], lists: newLists }
       };
     }
-    case "DELETE_LIST": {
-      const { listId: newListId, boardId } = action.payload;
-      return {
-        ...state,
-        [boardId]: {
-          ...state[boardId],
-          lists: state[boardId].lists.filter(listId => listId !== newListId),
-          archuveLists: [...state.archuveLists, newListId]
-        }
-      };
-    }
     case "DELETE_BOARD": {
       const { boardId } = action.payload;
       const { [boardId]: deleteBoard, ...restOfBoards } = state;

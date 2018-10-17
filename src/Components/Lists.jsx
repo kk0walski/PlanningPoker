@@ -87,7 +87,8 @@ class Lists extends Component {
                   lists &&
                   listsOrder.map((listId, index) => {
                     const list = lists[listId];
-                    if (list) {
+                    console.log("LISTA: ", list);
+                    if (list && list.visible) {
                       return (
                         <InnerList
                           list={list}
@@ -98,8 +99,6 @@ class Lists extends Component {
                           key={list.id}
                         />
                       );
-                    } else {
-                      return <p>Loading...</p>;
                     }
                   })}
                 {provided.placeholder}

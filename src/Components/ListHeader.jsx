@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Button, Wrapper, Menu, MenuItem } from "react-aria-menubutton";
 import { FaArchive } from "react-icons/fa";
 import { startChangeListName } from "../actions/Lists";
-import { startRemoveList } from "../actions/Board";
+import { startArchiveList } from "../actions/Board";
 
 class ListHeader extends Component {
   constructor(props) {
@@ -48,7 +48,7 @@ class ListHeader extends Component {
       listId,
       boardId
     };
-    this.props.startRemoveList(listData);
+    this.props.startArchiveList(listData);
   };
 
   openTitleEditor = () => {
@@ -124,7 +124,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = dispatch => ({
   startChangeListName: (boardId, listId, listTitle) =>
     dispatch(startChangeListName(boardId, listId, listTitle)),
-  startRemoveList: listData => dispatch(startRemoveList(listData))
+  startArchiveList: listData => dispatch(startArchiveList(listData))
 });
 
 export default connect(

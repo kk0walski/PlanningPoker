@@ -128,7 +128,8 @@ export const startAddList = (boardId, listTitle) => {
     const list = {
       id: key,
       title: listTitle,
-      cards: []
+      cards: [],
+      visible: true
     };
     ref.set(list).then(() => {
       boardRef.update({
@@ -138,27 +139,30 @@ export const startAddList = (boardId, listTitle) => {
   };
 };
 
-export const deleteList = (boardId, listId) => ({
-  type: "DELETE_LIST",
+export const archiveList = (boardId, listId) => ({
+  type: "ARCHIVE_LIST",
   payload: {
     boardId,
     listId
   }
 });
 
-export const justRemoveList = (boardId, listId) => {
+export const justArchiveList = (boardId, listId) => {
   return dispatch => {
-    return dispatch(deleteList(boardId, listId));
+    return dispatch(archiveList(boardId, listId));
   };
 };
 
-export const startRemoveList = ({ boardId, listId } = {}) => {
+export const startArchiveList = ({ boardId, listId } = {}) => {
   return dispatch => {
-    const boardRef = db.collection("boards").doc(boardId);
+    const listRef = db
+      .collection("boards")
+      .doc(boardId.toString())
+      .collection("lists")
+      .doc(listId.toString());
 
-    boardRef.update({
-      lists: firebase.firestore.FieldValue.arrayRemove(listId.toString()),
-      archuveLists: firebase.firestore.FieldValue.arrayUnion(listId.toString())
+    listRef.update({ visible: false }).then(() => {
+      dispatch(archiveList(boardId, listId));
     });
   };
 };

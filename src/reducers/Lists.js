@@ -1,7 +1,7 @@
 const Lists = (state = {}, action) => {
   switch (action.type) {
     case "ADD_LIST": {
-      const { boardId, id, title, cards } = action.payload;
+      const { boardId, id, title, cards, visible } = action.payload;
       return {
         ...state,
         [boardId]: {
@@ -9,7 +9,8 @@ const Lists = (state = {}, action) => {
           [id]: {
             id,
             title,
-            cards
+            cards,
+            visible
           }
         }
       };
@@ -81,6 +82,19 @@ const Lists = (state = {}, action) => {
           [listId]: {
             ...state[boardId][listId],
             title: listTitle
+          }
+        }
+      };
+    }
+    case "ARCHIVE_LIST": {
+      const { boardId, listId } = action.payload;
+      return {
+        ...state,
+        [boardId]: {
+          ...state[boardId],
+          [listId]: {
+            ...state[boardId][listId],
+            visible: false
           }
         }
       };

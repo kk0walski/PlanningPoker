@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router";
 import Board from "./Board";
 import db from "../firebase/firebase";
-import { justAddList, justRemoveList } from "../actions/Board";
+import { justAddList } from "../actions/Board";
 
 // This components only purpose is to redirect requests for board pages that don't exist
 // or which the user is not authorized to visit, in order to prevent errors
@@ -27,9 +27,6 @@ class BoardContainer extends Component {
           }
           if (change.type === "modified") {
             this.props.justAddList({ ...change.doc.data(), boardId });
-          }
-          if (change.type === "removed") {
-            this.props.justRemoveList(boardId, change.doc.data().id);
           }
         });
       });
@@ -59,8 +56,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  justAddList: list => dispatch(justAddList(list)),
-  justRemoveList: (boardId, listId) => dispatch(justRemoveList(boardId, listId))
+  justAddList: list => dispatch(justAddList(list))
 });
 
 export default connect(
