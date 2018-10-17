@@ -1,0 +1,322 @@
+@import "../base/settings";
+
+.options-list {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  margin: 0 8px;
+
+  @media (max-width: 550px) {
+    justify-content: center;
+    flex-direction: row;
+    width: 100%;
+    margin: 0;
+  }
+}
+
+.options-list-button {
+  display: flex;
+  align-items: center;
+  height: 33px;
+  margin: 0 3px 4px 3px;
+  padding: 0 6px;
+  border: 0;
+  border-radius: 3px;
+  color: black;
+  background: rgba(255, 255, 255, 0.8);
+  font-size: inherit;
+  cursor: pointer;
+}
+
+.options-list-button:hover,
+.options-list-button:focus {
+  background: white;
+}
+
+.modal-icon {
+  flex-shrink: 0;
+  margin-bottom: 3px;
+}
+
+.modal-icon-card {
+  float: right;
+  margin: 3px;
+}
+
+.calendar-modal {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+}
+
+.calendar-underlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+}
+
+.calendar {
+  display: flex;
+  flex-direction: column;
+  border-radius: 3px;
+  background: white;
+}
+
+.calendar-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 8px;
+
+  button {
+    width: 120px;
+    height: 30px;
+    border: 0;
+    border-radius: 3px;
+    font-size: 14px;
+    font-weight: 700;
+    transition: background 0.2s;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background: #bbb;
+  }
+
+  .calendar-save-button {
+    color: white;
+    background: $success-button-color;
+  }
+
+  .calendar-save-button:hover {
+    background: $success-button-color-hover;
+  }
+}
+
+.modal-color-picker-wrapper {
+  position: relative;
+}
+
+.modal-color-picker {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  flex-wrap: wrap;
+  width: 300px;
+  margin-top: 4px;
+  padding: 5px;
+  border-radius: 3px;
+  color: black;
+  background: white;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.6);
+  font-weight: 700;
+  text-align: center;
+}
+
+.color-picker-color {
+  width: 100%;
+  height: 36px;
+  margin: 2px;
+  border: 1px #999 solid;
+  border-radius: 3px;
+}
+
+.pop-over-header {
+  height: 36px;
+  position: relative;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.pop-over-header-title {
+  box-sizing: border-box;
+  color: #838c91;
+  display: block;
+  line-height: 36px;
+  border-bottom: 1px solid #d6dadc;
+  margin: 0 10px;
+  overflow: hidden;
+  padding: 0 32px;
+  position: relative;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  z-index: 1;
+}
+
+.pop-over-header-close-btn {
+  padding: 10px 10px 10px 4px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+}
+
+.icon-sm {
+  height: 18px;
+  font-size: 12px;
+  line-height: 18px;
+  width: 19px;
+}
+.icon-close {
+  content: "\E917";
+}
+
+input[type="text"] {
+  margin: 4px 0 12px;
+  width: 100%;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  background-color: #e2e4e6;
+  border: 1px solid #cdd2d4;
+  border-radius: 3px;
+  display: block;
+  padding: 7px;
+}
+
+.edit-labels-pop-over {
+  margin-bottom: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  li {
+    padding-right: 38px;
+    position: relative;
+  }
+}
+
+li {
+  display: list-item;
+  text-align: -webkit-match-parent;
+}
+
+.card-label.mod-selectable {
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  margin: 0 0 4px;
+  min-height: 18px;
+  padding: 8px;
+  position: relative;
+  -webkit-transition: padding 85ms, margin 85ms, -webkit-box-shadow 85ms;
+  transition: padding 85ms, margin 85ms, -webkit-box-shadow 85ms;
+  transition: padding 85ms, margin 85ms, box-shadow 85ms;
+  transition: padding 85ms, margin 85ms, box-shadow 85ms,
+    -webkit-box-shadow 85ms;
+}
+
+.card-label {
+  background-color: #b6bbbf;
+  border-radius: 3px;
+  color: #fff;
+  display: block;
+  margin-right: 3px;
+  max-width: 100%;
+  overflow: hidden;
+  padding: 3px 6px;
+  position: relative;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.mod-card-front {
+  float: left;
+  font-size: 12px;
+  font-weight: 600;
+  height: 8px;
+  line-height: 100px;
+  margin: 0 3px 3px 0;
+  max-width: 42px;
+  min-width: 42px;
+  padding: 0;
+  text-shadow: none;
+  width: auto;
+}
+
+.card-label-edit-button {
+  border-radius: 3px;
+  padding: 8px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.icon-sm {
+  height: 18px;
+  font-size: 12px;
+  line-height: 18px;
+  width: 19px;
+}
+
+.quiet-button {
+  border-radius: 3px;
+  color: #838c91;
+  display: block;
+  margin: 2px 0;
+  padding: 7px 16px;
+  position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.card-label.mod-selectable.active .card-label-selectable-icon {
+  right: 6px;
+}
+
+.card-label.mod-selectable .card-label-selectable-icon {
+  position: absolute;
+  top: 8px;
+  right: 20px;
+}
+
+.pop-over-header-back-btn {
+  display: none;
+  padding: 10px 4px 10px 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+.card-label.mod-edit-label {
+  float: left;
+  height: 30px;
+  margin: 0 10px 10px 0;
+  width: 34px;
+}
+
+input[type="submit"].primary {
+  background: #5aac44;
+  -webkit-box-shadow: 0 1px 0 #519839;
+  box-shadow: 0 1px 0 #519839;
+  color: #fff;
+  -webkit-transition: backgroun 0.3s ease;
+  -webkit-transition: background 0.3s ease;
+  transition: background 0.3s ease;
+}
+
+.u-clearfix {
+  clear: both;
+  display: table;
+}
+
+.u-float-right {
+  float: right;
+}
+
+input[type="submit"].negate {
+  background: #eb5a46;
+  border-bottom-color: #b04632;
+  color: #fff;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  -webkit-transition: backgroun 0.3s ease;
+  -webkit-transition: background 0.3s ease;
+  transition: background 0.3s ease;
+}
