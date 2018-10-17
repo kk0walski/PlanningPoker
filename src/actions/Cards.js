@@ -15,7 +15,9 @@ export const startChangeCardTitle = (boardId, cardId, cardTitle) => {
       .doc(boardId.toString())
       .collection("cards")
       .doc(cardId.toString())
-      .update({ title: cardTitle })
+      .update({
+        title: cardTitle
+      })
       .then(() => {
         dispatch(changeCardTitle(boardId, cardId, cardTitle));
       });
@@ -38,7 +40,9 @@ export const startChangeCardColor = (boardId, cardId, color) => {
       .doc(boardId.toString())
       .collection("cards")
       .doc(cardId.toString())
-      .update({ color })
+      .update({
+        color
+      })
       .then(() => {
         dispatch(changeCardColor(boardId, cardId, color));
       });
@@ -67,9 +71,13 @@ export const startArchiveCard = ({ boardId, cardId } = {}) => {
       .collection("cards")
       .doc(cardId.toString());
 
-    cardRef.update({ visible: false }).then(() => {
-      dispatch(justArchiveCard(boardId, cardId));
-    });
+    cardRef
+      .update({
+        visible: false
+      })
+      .then(() => {
+        dispatch(justArchiveCard(boardId, cardId));
+      });
   };
 };
 
@@ -92,9 +100,35 @@ export const startChangeCardDescription = (
       .doc(boardId.toString())
       .collection("cards")
       .doc(cardId.toString())
-      .update({ description: cardDescription })
+      .update({
+        description: cardDescription
+      })
       .then(() => {
         dispatch(changeCardTitle(boardId, cardId, cardDescription));
+      });
+  };
+};
+
+export const changeCardDate = (boardId, cardId, newDate) => ({
+  type: "CHANGE_CARD_DATE",
+  payload: {
+    boardId,
+    cardId,
+    date: newDate
+  }
+});
+
+export const startChangeCardDate = (boardId, cardId, newDate) => {
+  return dispatch => {
+    db.collection("boards")
+      .doc(boardId.toString())
+      .collection("cards")
+      .doc(cardId.toString())
+      .update({
+        date: newDate
+      })
+      .then(() => {
+        dispatch(changeCardDate(boardId, cardId, newDate));
       });
   };
 };
