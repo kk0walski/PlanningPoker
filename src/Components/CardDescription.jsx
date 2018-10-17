@@ -8,11 +8,11 @@ import { MdClose } from "react-icons/md";
 import { startChangeCardDescription } from "../actions/Cards";
 
 class CardDescription extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.openEditor.bind(this);
     this.state = {
-      newText: this.props.cardDescription,
+      newText: props.cardDescription ? props.cardDescription : "",
       isOpen: false
     };
   }

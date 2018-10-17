@@ -107,23 +107,20 @@ class Card extends Component {
                   >
                     <FaPencilAlt />
                   </span>
-                  <div
-                    className="card-title-html"
-                    onClick={this.toggleCardDetailsEditor}
-                  >
-                    {card.title}
+                  <div onClick={this.toggleCardDetailsEditor}>
+                    <div className="card-title-html">{card.title}</div>
+                    {/* eslint-enable */}
+                    {(card.date || checkboxes.total > 0) && (
+                      <CardBadges
+                        date={
+                          card.date.seconds
+                            ? new Date(card.date.seconds * 1000)
+                            : card.date
+                        }
+                        checkboxes={checkboxes}
+                      />
+                    )}
                   </div>
-                  {/* eslint-enable */}
-                  {(card.date || checkboxes.total > 0) && (
-                    <CardBadges
-                      date={
-                        card.date.seconds
-                          ? new Date(card.date.seconds * 1000)
-                          : card.date
-                      }
-                      checkboxes={checkboxes}
-                    />
-                  )}
                 </div>
                 {/* Remove placeholder when not dragging over to reduce snapping */}
                 {isDraggingOver && provided.placeholder}
