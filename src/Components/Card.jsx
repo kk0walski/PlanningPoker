@@ -115,7 +115,14 @@ class Card extends Component {
                   </div>
                   {/* eslint-enable */}
                   {(card.date || checkboxes.total > 0) && (
-                    <CardBadges date={card.date} checkboxes={checkboxes} />
+                    <CardBadges
+                      date={
+                        card.date.seconds
+                          ? new Date(card.date.seconds * 1000)
+                          : card.date
+                      }
+                      checkboxes={checkboxes}
+                    />
                   )}
                 </div>
                 {/* Remove placeholder when not dragging over to reduce snapping */}
