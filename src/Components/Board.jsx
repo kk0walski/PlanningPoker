@@ -45,17 +45,16 @@ class Board extends Component {
   render() {
     const { boardId, boardTitle, boardColor, listsOrder } = this.props;
     return (
-      <div>
-        <div className={classnames("board", boardColor)}>
-          <Helmet>
-            <title>{boardTitle} | Team Estimation Game</title>
-          </Helmet>
-          <Header />
-          <BoardHeader />
-          <div className="lists-wrapper">
-            <Lists boardId={boardId} listsOrder={listsOrder} />
-          </div>
+      <div className={classnames("board", boardColor)}>
+        <Helmet>
+          <title>{boardTitle} | Team Estimation Game</title>
+        </Helmet>
+        <Header />
+        <BoardHeader />
+        <div className="lists-wrapper">
+          <Lists boardId={boardId} listsOrder={listsOrder} />
         </div>
+        <div className="board-underlay" />
       </div>
     );
   }
