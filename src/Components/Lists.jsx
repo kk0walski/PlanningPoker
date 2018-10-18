@@ -77,38 +77,32 @@ class Lists extends Component {
       <DragDropContext onDragEnd={this.handleDragEnd}>
         <Droppable droppableId={boardId} direction="horizontal" type="COLUMN">
           {provided => (
-            <div>
-              <div
-                className="lists"
-                {...provided.droppableProps}
-                ref={provided.innerRef}
-              >
-                {listsOrder &&
-                  lists &&
-                  listsOrder.map((listId, index) => {
-                    const list = lists[listId];
-                    if (list) {
-                      if (list.visible) {
-                        return (
-                          <InnerList
-                            list={list}
-                            cardMap={cards}
-                            index={index}
-                            boardId={boardId}
-                            listsOrder={listsOrder}
-                            key={list.id}
-                          />
-                        );
-                      } else {
-                        return null;
-                      }
+            <div className="lists" ref={provided.innerRef}>
+              {listsOrder &&
+                lists &&
+                listsOrder.map((listId, index) => {
+                  const list = lists[listId];
+                  if (list) {
+                    if (list.visible) {
+                      return (
+                        <InnerList
+                          list={list}
+                          cardMap={cards}
+                          index={index}
+                          boardId={boardId}
+                          listsOrder={listsOrder}
+                          key={list.id}
+                        />
+                      );
                     } else {
-                      return <p key={-1}>Loading...</p>;
+                      return null;
                     }
-                  })}
-                {provided.placeholder}
-                <ListAdder boardId={boardId} listsOrder={listsOrder} />
-              </div>
+                  } else {
+                    return null;
+                  }
+                })}
+              {provided.placeholder}
+              <ListAdder boardId={boardId} listsOrder={listsOrder} />
             </div>
           )}
         </Droppable>

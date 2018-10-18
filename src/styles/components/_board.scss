@@ -14,16 +14,16 @@
   z-index: -1;
   transition: background 0.3s;
 }
-.green {
+.green .board-underlay {
   background: $green;
 }
-.blue {
+.blue .board-underlay {
   background: $blue;
 }
-.red {
+.red .board-underlay {
   background: $red;
 }
-.pink {
+.pink .board-underlay {
   background: $pink;
 }
 
