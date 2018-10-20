@@ -9,7 +9,8 @@ const user = (state = null, action) => {
         emailVerified,
         photoURL,
         isAnonymous,
-        phoneNumber
+        phoneNumber,
+        token
       } = action.payload.user;
       const user = {
         uid,
@@ -18,7 +19,8 @@ const user = (state = null, action) => {
         photoURL,
         emailVerified,
         isAnonymous,
-        phoneNumber
+        phoneNumber,
+        token
       };
       return user;
     }
