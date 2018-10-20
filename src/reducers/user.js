@@ -9,9 +9,10 @@ const user = (state = null, action) => {
         emailVerified,
         photoURL,
         isAnonymous,
-        phoneNumber,
-        token
+        phoneNumber
       } = action.payload.user;
+      console.log("PAYLOAD: ", action.payload);
+      const { token } = action.payload;
       const user = {
         uid,
         displayName,
