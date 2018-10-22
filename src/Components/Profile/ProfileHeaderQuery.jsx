@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import Profile from "./ProfileHeader";
 import { Query } from "react-apollo";
 import Loading from "../Loading";
@@ -12,14 +11,19 @@ export default class ProfileHeaderQuery extends Component {
     return (
       <Query query={GET_USER_PROFILE} notifyOnNetworkStatusChange={true}>
         {({ data, loading, error }) => {
+          if (error) {
+            console.log("ERROR: ", error);
+            return <ErrorMessage error={error} />;
+          }
+
+          console.log("DATA: ", data);
+          if (!data) {
+            return <Loading isCenter={true} />;
+          }
           const { viewer } = data;
 
           if (loading && !viewer) {
             return <Loading isCenter={true} />;
-          }
-
-          if (error) {
-            return <ErrorMessage error={error} />;
           }
 
           console.log("VIEWER: ", viewer);

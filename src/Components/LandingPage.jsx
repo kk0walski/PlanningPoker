@@ -19,10 +19,13 @@ class LandingPage extends React.Component {
 
   handleSocialLogin = () => {
     var provider = new firebase.auth.GithubAuthProvider();
+    provider.addScope("repo");
+    provider.addScope("user");
     firebase
       .auth()
       .signInWithPopup(provider)
       .then(result => {
+        console.log("RESULT: ", result);
         if (result && result.credential && result.user) {
           const token = result.credential.accessToken;
           this.props.enterAsUser(result.user, token);

@@ -14,6 +14,7 @@ import { ApolloLink } from "apollo-link";
 import { HttpLink } from "apollo-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { onError } from "apollo-link-error";
+import { setContext } from "apollo-link-context";
 
 class App extends Component {
   static propTypes = {
@@ -60,31 +61,62 @@ class App extends Component {
 
   render() {
     const { user } = this.props;
-    if (user) {
+    if (user && user.token) {
       console.log("TOKEN: ", user.token);
       const GITHUB_BASE_URL = "https://api.github.com/graphql";
       const httpLink = new HttpLink({
-        uri: GITHUB_BASE_URL,
-        headers: {
-          authorization: `Bearer ${user.token}`
-        }
+        uri: GITHUB_BASE_URL
       });
 
-      const errorLink = onError(({ graphQLErrors, networkError }) => {
-        if (graphQLErrors) {
-          graphQLErrors.map(({ message, locations, path }) =>
-            console.log(
-              `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-            )
-          );
-        }
+      const authLink = setContext((_, { headers }) => {
+        const token = user.token;
 
-        if (networkError) {
-          console.log(`[Network error]: ${networkError}`);
-        }
+        return {
+          headers: {
+            ...headers,
+            authorization: token ? `Bearer ${token}` : ""
+          }
+        };
       });
 
-      const link = ApolloLink.from([errorLink, httpLink]);
+      const errorLink = onError(
+        ({ graphQLErrors, networkError, operation, forward }) => {
+          if (graphQLErrors) {
+            graphQLErrors.map(({ message, extensions, locations, path }) => {
+              console.log("EXTENSIONS: ", extensions);
+              switch (extensions.code) {
+                case "UNAUTHENTICATED":
+                  // old token has expired throwing AuthenticationError,
+                  // one way to handle is to obtain a new token and
+                  // add it to the operation context
+                  const headers = operation.getContext().headers;
+                  operation.setContext({
+                    headers: {
+                      ...headers,
+                      authorization: user.token
+                    }
+                  });
+                  // Now, pass the modified operation to the next link
+                  // in the chain. This effectively intercepts the old
+                  // failed request, and retries it with a new token
+                  return forward(operation);
+                default:
+                  console.log(
+                    `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+                  );
+              }
+            });
+          }
+
+          if (networkError) {
+            console.log(`[Network error]: ${networkError}`);
+          }
+        }
+      );
+
+      const gitLink = authLink.concat(httpLink);
+
+      const link = ApolloLink.from([errorLink, gitLink]);
 
       const cache = new InMemoryCache();
 

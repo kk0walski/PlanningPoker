@@ -5,6 +5,7 @@ import { Helmet } from "react-helmet";
 import classnames from "classnames";
 import Header from "../Header";
 import ProfileQuery from "./ProfileHeaderQuery";
+import Repositories from "./Repositories";
 
 class Profile extends Component {
   static propTypes = {
@@ -21,20 +22,20 @@ class Profile extends Component {
         <Header />
         <div id="content">
           <ProfileQuery />
-          <div className={classnames("tabbed-pane-nav", "u-clearfix")}>
-            <ul>
-              <li className="tabbed-pane-nav-item">
-                <p
-                  className={classnames(
-                    "tabbed-pane-nav-item-button",
-                    "active"
-                  )}
-                >
-                  Profil
-                </p>
-              </li>
-            </ul>
-          </div>
+        </div>
+        <div className={classnames("tabbed-pane-nav", "u-clearfix")}>
+          <ul>
+            <li className="tabbed-pane-nav-item">
+              <p
+                className={classnames("tabbed-pane-nav-item-button", "active")}
+              >
+                Repositories
+              </p>
+            </li>
+          </ul>
+        </div>
+        <div className="repositories">
+          <Repositories />
         </div>
       </div>
     );
