@@ -35,6 +35,7 @@ class OrganizationSearch extends React.Component {
           <input
             type="text"
             value={value}
+            className="search"
             placeholder="Search.."
             name="search"
           />
