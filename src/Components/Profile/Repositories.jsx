@@ -14,11 +14,8 @@ const Repositories = () => (
   >
     {({ data, loading, error, fetchMore }) => {
       if (error) {
-        console.log("ERROR: ", error);
         return <ErrorMessage error={error} />;
       }
-
-      console.log("DATA: ", data);
 
       if (!data) {
         return <Loading isCenter={true} />;

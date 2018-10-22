@@ -25,7 +25,6 @@ class LandingPage extends React.Component {
       .auth()
       .signInWithPopup(provider)
       .then(result => {
-        console.log("RESULT: ", result);
         if (result && result.credential && result.user) {
           const token = result.credential.accessToken;
           this.props.enterAsUser(result.user, token);

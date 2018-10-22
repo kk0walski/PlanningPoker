@@ -12,11 +12,9 @@ export default class ProfileHeaderQuery extends Component {
       <Query query={GET_USER_PROFILE} notifyOnNetworkStatusChange={true}>
         {({ data, loading, error }) => {
           if (error) {
-            console.log("ERROR: ", error);
             return <ErrorMessage error={error} />;
           }
 
-          console.log("DATA: ", data);
           if (!data) {
             return <Loading isCenter={true} />;
           }
@@ -25,8 +23,6 @@ export default class ProfileHeaderQuery extends Component {
           if (loading && !viewer) {
             return <Loading isCenter={true} />;
           }
-
-          console.log("VIEWER: ", viewer);
 
           const profile = {
             login: viewer.login,

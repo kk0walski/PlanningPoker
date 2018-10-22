@@ -62,7 +62,6 @@ class App extends Component {
   render() {
     const { user } = this.props;
     if (user && user.token) {
-      console.log("TOKEN: ", user.token);
       const GITHUB_BASE_URL = "https://api.github.com/graphql";
       const httpLink = new HttpLink({
         uri: GITHUB_BASE_URL
@@ -83,7 +82,6 @@ class App extends Component {
         ({ graphQLErrors, networkError, operation, forward }) => {
           if (graphQLErrors) {
             graphQLErrors.map(({ message, extensions, locations, path }) => {
-              console.log("EXTENSIONS: ", extensions);
               switch (extensions.code) {
                 case "UNAUTHENTICATED":
                   // old token has expired throwing AuthenticationError,
@@ -102,6 +100,9 @@ class App extends Component {
                   return forward(operation);
                 default:
                   console.log(
+                    `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+                  );
+                  return new Error(
                     `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
                   );
               }

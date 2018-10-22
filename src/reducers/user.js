@@ -11,7 +11,6 @@ const user = (state = null, action) => {
         isAnonymous,
         phoneNumber
       } = action.payload.user;
-      console.log("PAYLOAD: ", action.payload);
       const { token } = action.payload;
       const user = {
         uid,
