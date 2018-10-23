@@ -5,7 +5,6 @@ import { ApolloLink } from "apollo-link";
 import { HttpLink } from "apollo-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { onError } from "apollo-link-error";
-import { setContext } from "apollo-link-context";
 import Organisation from "./Organisation";
 
 export default class OrganisationContainer extends Component {

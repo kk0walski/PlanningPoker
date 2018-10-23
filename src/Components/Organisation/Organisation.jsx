@@ -22,12 +22,12 @@ export default class Organisation extends Component {
           <title>Home | Team Estimation Game</title>
         </Helmet>
         <Header />
+        <Navigation
+          organizationName={organizationName}
+          onOrganizationSearch={this.onOrganizationSearch}
+        />
         <div className="home">
           <div className="main-content" style={{ margin: "40px 0" }}>
-            <Navigation
-              organizationName={organizationName}
-              onOrganizationSearch={this.onOrganizationSearch}
-            />
             <OrganisationQuery organizationName={organizationName} />
           </div>
         </div>
