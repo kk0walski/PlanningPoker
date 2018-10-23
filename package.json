@@ -16,6 +16,7 @@
     "lint-staged": "^7.3.0",
     "node-sass": "^4.9.3",
     "normalize.css": "^8.0.0",
+    "npm": "^6.4.1",
     "prettier": "^1.14.3",
     "pretty-quick": "^1.8.0",
     "react": "^16.5.2",
