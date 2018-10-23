@@ -22,7 +22,6 @@ class OrganizationSearch extends React.Component {
 
   onSubmit = event => {
     this.props.onOrganizationSearch(this.state.value);
-
     event.preventDefault();
   };
 
@@ -31,13 +30,14 @@ class OrganizationSearch extends React.Component {
 
     return (
       <div className="search-container">
-        <form>
+        <form onSubmit={this.onSubmit}>
           <input
             type="text"
             value={value}
             className="search"
             placeholder="Search.."
             name="search"
+            onChange={this.onChange}
           />
           <button type="submit">
             <FaSearch />
