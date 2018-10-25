@@ -2,6 +2,16 @@ import gql from "graphql-tag";
 
 import { REPOSITORY_FRAGMENT } from "../Repository";
 
+export const GET_ORGANISATION_PROFILE = gql`
+  query($organizationName: String!) {
+    organization(login: $organizationName) {
+      login
+      email
+      avatarUrl
+    }
+  }
+`;
+
 export const GET_REPOSITORIES_OF_ORGANIZATION = gql`
   query($organizationName: String!, $cursor: String) {
     organization(login: $organizationName) {

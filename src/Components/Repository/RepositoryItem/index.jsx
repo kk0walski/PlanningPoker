@@ -6,12 +6,14 @@ const RepositoryItem = ({
   url,
   descriptionHTML,
   primaryLanguage,
-  owner
+  owner,
+  match
 }) => (
   <div>
     <div className="RepositoryItem-title">
       <h2>
         <Link href={url}>{name}</Link>
+        <p>{match}</p>
       </h2>
     </div>
 

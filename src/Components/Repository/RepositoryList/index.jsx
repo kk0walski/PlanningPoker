@@ -24,11 +24,11 @@ const getUpdateQuery = entry => (previousResult, { fetchMoreResult }) => {
   };
 };
 
-const RepositoryList = ({ entry, repositories, loading, fetchMore }) => (
+const RepositoryList = ({ entry, repositories, loading, fetchMore, match }) => (
   <Fragment>
     {repositories.edges.map(({ node }) => (
       <div key={node.id} className="RepositoryItem">
-        <RepositoryItem {...node} />
+        <RepositoryItem {...node} match={match} />
       </div>
     ))}
 

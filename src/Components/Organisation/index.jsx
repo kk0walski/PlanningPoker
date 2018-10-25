@@ -58,7 +58,7 @@ export default class OrganisationContainer extends Component {
             <Switch>
               <Route exact path={match.path} component={Organisation} />
               <Route
-                path={`${match.path}/:organisation`}
+                path={`${match.path}/:organisation/:repository`}
                 component={OrganisationIssues}
               />
             </Switch>
