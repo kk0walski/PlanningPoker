@@ -6,7 +6,7 @@ import { HttpLink } from "apollo-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { onError } from "apollo-link-error";
 import Organisation from "./Organisation";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import OrganisationIssues from "../Issues";
 import { Helmet } from "react-helmet";
 import Header from "../Header";
@@ -54,15 +54,13 @@ export default class OrganisationContainer extends Component {
             <title>Home | Team Estimation Game</title>
           </Helmet>
           <Header />
-          <Router>
-            <Switch>
-              <Route exact path={match.path} component={Organisation} />
-              <Route
-                path={`${match.path}/:organisation/:repository`}
-                component={OrganisationIssues}
-              />
-            </Switch>
-          </Router>
+          <Switch>
+            <Route exact path={match.path} component={Organisation} />
+            <Route
+              path={`${match.path}/:organisation/:repository`}
+              component={OrganisationIssues}
+            />
+          </Switch>
         </div>
       </ApolloProvider>
     );

@@ -19,11 +19,11 @@ export default class Organisation extends Component {
 
     return (
       <div>
-        <Navigation
-          organizationName={organizationName}
-          onOrganizationSearch={this.onOrganizationSearch}
-        />
         <div id="content">
+          <Navigation
+            organizationName={organizationName}
+            onOrganizationSearch={this.onOrganizationSearch}
+          />
           <ProfileOrgQuery organizationName={organizationName} />
         </div>
         <div className={classnames("tabbed-pane-nav", "u-clearfix")}>
