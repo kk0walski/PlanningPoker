@@ -6,9 +6,14 @@ import { HttpLink } from "apollo-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { onError } from "apollo-link-error";
 import Organisation from "./Organisation";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import OrganisationIssues from "./organisationIssues";
+import { Helmet } from "react-helmet";
+import Header from "../Header";
 
 export default class OrganisationContainer extends Component {
   render() {
+    const { match } = this.props;
     const GITHUB_BASE_URL = "https://api.github.com/graphql";
 
     const httpLink = new HttpLink({
@@ -44,7 +49,19 @@ export default class OrganisationContainer extends Component {
     });
     return (
       <ApolloProvider client={client}>
-        <Organisation />
+        <Router>
+          <div style={{ width: "100%", height: "100%" }}>
+            <Helmet>
+              <title>Home | Team Estimation Game</title>
+            </Helmet>
+            <Header />
+            <Route exact path={match.path} component={Organisation} />
+            <Route
+              path={`${match.path}/:organisation`}
+              component={OrganisationIssues}
+            />
+          </div>
+        </Router>
       </ApolloProvider>
     );
   }

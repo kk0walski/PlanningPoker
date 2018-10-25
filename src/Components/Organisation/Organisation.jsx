@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { Helmet } from "react-helmet";
-import Header from "../Header";
 import Navigation from "./Navigation";
 import OrganisationQuery from "./OrganisationQuery";
 
@@ -17,11 +15,7 @@ export default class Organisation extends Component {
     const { organizationName } = this.state;
 
     return (
-      <div style={{ width: "100%", height: "100%" }}>
-        <Helmet>
-          <title>Home | Team Estimation Game</title>
-        </Helmet>
-        <Header />
+      <div>
         <Navigation
           organizationName={organizationName}
           onOrganizationSearch={this.onOrganizationSearch}

@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Helmet } from "react-helmet";
 import classnames from "classnames";
-import Header from "../Header";
 import ProfileQuery from "./ProfileHeaderQuery";
 import Repositories from "./Repositories";
 
@@ -15,11 +13,7 @@ class Profile extends Component {
 
   render() {
     return (
-      <div style={{ width: "100%", height: "100%" }}>
-        <Helmet>
-          <title>Home | Team Estimation Game</title>
-        </Helmet>
-        <Header />
+      <div>
         <div id="content">
           <ProfileQuery />
         </div>
