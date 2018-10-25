@@ -11,7 +11,7 @@ import { setContext } from "apollo-link-context";
 import Profile from "./Profile";
 import { Helmet } from "react-helmet";
 import Header from "../Header";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 class ProfileContainer extends Component {
   static propTypes = {
@@ -95,15 +95,17 @@ class ProfileContainer extends Component {
       });
       return (
         <ApolloProvider client={client}>
-          <Router>
-            <div style={{ width: "100%", height: "100%" }}>
-              <Helmet>
-                <title>Home | Team Estimation Game</title>
-              </Helmet>
-              <Header />
-              <Route exact path={match.path} component={Profile} />
-            </div>
-          </Router>
+          <div style={{ width: "100%", height: "100%" }}>
+            <Helmet>
+              <title>Home | Team Estimation Game</title>
+            </Helmet>
+            <Header />
+            <Router>
+              <Switch>
+                <Route exact path={match.path} component={Profile} />
+              </Switch>
+            </Router>
+          </div>
         </ApolloProvider>
       );
     } else {
