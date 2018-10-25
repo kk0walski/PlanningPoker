@@ -7,7 +7,7 @@ import RepositoryList from "../Repository";
 import Loading from "../Loading";
 import ErrorMessage from "../Error";
 
-const Organization = ({ organizationName }) => (
+const Organization = ({ organizationName, match }) => (
   <Query
     query={GET_REPOSITORIES_OF_ORGANIZATION}
     variables={{
@@ -32,6 +32,7 @@ const Organization = ({ organizationName }) => (
           loading={loading}
           repositories={organization.repositories}
           fetchMore={fetchMore}
+          match={match}
           entry={"organization"}
         />
       );

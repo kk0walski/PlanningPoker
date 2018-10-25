@@ -24,26 +24,28 @@ const getUpdateQuery = entry => (previousResult, { fetchMoreResult }) => {
   };
 };
 
-const RepositoryList = ({ entry, repositories, loading, fetchMore, match }) => (
-  <Fragment>
-    {repositories.edges.map(({ node }) => (
-      <div key={node.id} className="RepositoryItem">
-        <RepositoryItem {...node} match={match} />
-      </div>
-    ))}
+const RepositoryList = ({ entry, match, repositories, loading, fetchMore }) => {
+  return (
+    <Fragment>
+      {repositories.edges.map(({ node }) => (
+        <div key={node.id} className="RepositoryItem">
+          <RepositoryItem {...node} match={match} />
+        </div>
+      ))}
 
-    <FetchMore
-      loading={loading}
-      hasNextPage={repositories.pageInfo.hasNextPage}
-      variables={{
-        cursor: repositories.pageInfo.endCursor
-      }}
-      updateQuery={getUpdateQuery(entry)}
-      fetchMore={fetchMore}
-    >
-      Repositories
-    </FetchMore>
-  </Fragment>
-);
+      <FetchMore
+        loading={loading}
+        hasNextPage={repositories.pageInfo.hasNextPage}
+        variables={{
+          cursor: repositories.pageInfo.endCursor
+        }}
+        updateQuery={getUpdateQuery(entry)}
+        fetchMore={fetchMore}
+      >
+        Repositories
+      </FetchMore>
+    </Fragment>
+  );
+};
 
 export default RepositoryList;

@@ -1,22 +1,18 @@
+import Issues from "./IssueList";
 import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
 import classnames from "classnames";
-import ProfileQuery from "./ProfileHeaderQuery";
-import Repositories from "./Repositories";
+import IssuesHeader from "./Header";
 
-class Profile extends Component {
-  static propTypes = {
-    user: PropTypes.object.isRequired,
-    dispatch: PropTypes.func.isRequired
-  };
-
+export default class OrganisationIssues extends Component {
   render() {
     const { match } = this.props;
     return (
       <div>
         <div id="content">
-          <ProfileQuery />
+          <IssuesHeader
+            repositoryOwner={match.params.organisation}
+            repositoryName={match.params.repository}
+          />
         </div>
         <div className={classnames("tabbed-pane-nav", "u-clearfix")}>
           <ul>
@@ -24,19 +20,18 @@ class Profile extends Component {
               <p
                 className={classnames("tabbed-pane-nav-item-button", "active")}
               >
-                Repositories
+                Issues
               </p>
             </li>
           </ul>
         </div>
         <div className="repositories">
-          <Repositories match={match} />
+          <Issues
+            repositoryOwner={match.params.organisation}
+            repositoryName={match.params.repository}
+          />
         </div>
       </div>
     );
   }
 }
-
-const mapStateToProps = ({ user }) => ({ user });
-
-export default connect(mapStateToProps)(Profile);

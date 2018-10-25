@@ -7,7 +7,7 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 import { onError } from "apollo-link-error";
 import Organisation from "./Organisation";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import OrganisationIssues from "./organisationIssues";
+import OrganisationIssues from "../Issues";
 import { Helmet } from "react-helmet";
 import Header from "../Header";
 

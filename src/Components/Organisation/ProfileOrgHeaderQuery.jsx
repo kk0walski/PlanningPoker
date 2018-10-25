@@ -23,7 +23,6 @@ const ProfileOrgHeaderQuery = ({ organizationName }) => (
       if (!data) {
         return <Loading isCenter={true} />;
       }
-      console.log("DATA: ", data);
       const { organization } = data;
 
       if (loading && !organization) {

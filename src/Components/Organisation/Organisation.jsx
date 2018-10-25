@@ -15,6 +15,7 @@ export default class Organisation extends Component {
 
   render() {
     const { organizationName } = this.state;
+    const { match } = this.props;
 
     return (
       <div>
@@ -37,7 +38,10 @@ export default class Organisation extends Component {
           </ul>
         </div>
         <div className="main-content" style={{ margin: "40px 0" }}>
-          <OrganisationQuery organizationName={organizationName} />
+          <OrganisationQuery
+            organizationName={organizationName}
+            match={match}
+          />
         </div>
       </div>
     );

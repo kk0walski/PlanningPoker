@@ -7,7 +7,7 @@ import RepositoryList from "../Repository";
 import Loading from "../Loading";
 import ErrorMessage from "../Error";
 
-const Repositories = () => (
+const Repositories = ({ match }) => (
   <Query
     query={GET_REPOSITORIES_OF_CURRENT_USER}
     notifyOnNetworkStatusChange={true}
@@ -32,6 +32,7 @@ const Repositories = () => (
           loading={loading}
           repositories={viewer.repositories}
           fetchMore={fetchMore}
+          match={match}
           entry={"viewer"}
         />
       );

@@ -1,5 +1,5 @@
 import React from "react";
-import Link from "../../Link";
+import { Link } from "react-router-dom";
 
 const RepositoryItem = ({
   name,
@@ -12,8 +12,7 @@ const RepositoryItem = ({
   <div>
     <div className="RepositoryItem-title">
       <h2>
-        <Link href={url}>{name}</Link>
-        <p>{match}</p>
+        <Link to={`${match.url}/${owner.login}/${name}`}>{name}</Link>
       </h2>
     </div>
 
