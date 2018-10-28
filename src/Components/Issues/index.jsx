@@ -49,13 +49,6 @@ export default class OrganisationIssues extends Component {
             />
           </Switch>
         </div>
-        {/* 
-        <div className="repositories">
-          <Issues
-            repositoryOwner={match.params.organisation}
-            repositoryName={match.params.repository}
-          />
-        </div> */}
       </div>
     );
   }
