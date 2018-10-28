@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Helmet } from "react-helmet";
 import classnames from "classnames";
 import Header from "./Header";
+import Octokit from "@octokit/rest";
 
 class Profile extends Component {
   static propTypes = {
