@@ -52,6 +52,9 @@ class Header extends React.Component {
                 <Link className="pop-over-menu" to={"/profile"}>
                   Profil
                 </Link>
+                <Link className="pop-over-menu" to={"/organisation"}>
+                  Organisations
+                </Link>
                 <MenuItem className="pop-over-menu">Wyloguj</MenuItem>
               </div>
             </Menu>

@@ -7,6 +7,7 @@ import BoardContainer from "./Components/BoardContainer";
 import LandingPage from "./Components/LandingPage";
 import Profile from "./Components/Profile";
 import { justAddBoard, justRemoveBoard } from "./actions/Board";
+import Organisation from "./Components/Organisation";
 import db from "./firebase/firebase";
 
 class App extends Component {
@@ -60,6 +61,7 @@ class App extends Component {
           <Route exact path="/" component={Home} />
           <Route path="/b/:boardId" component={BoardContainer} />
           <Route path="/profile" component={Profile} />
+          <Route path="/organisation" component={Organisation} />
           <Redirect to="/" />
         </Switch>
       );

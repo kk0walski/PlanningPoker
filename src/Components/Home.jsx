@@ -8,6 +8,7 @@ import Header from "./Header";
 import BoardAdder from "./BoardAdder";
 import classnames from "classnames";
 import { firebase } from "../firebase/firebase";
+import { height } from "window-size";
 
 class Home extends Component {
   static propTypes = {
@@ -24,7 +25,7 @@ class Home extends Component {
   render() {
     const { boards, history } = this.props;
     return (
-      <div style={{ width: "100%" }}>
+      <div style={{ width: "100%", height: "100%" }}>
         <Helmet>
           <title>Home | Planning Poker</title>
         </Helmet>

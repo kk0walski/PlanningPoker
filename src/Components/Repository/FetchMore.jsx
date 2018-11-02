@@ -1,7 +1,7 @@
 import React from "react";
 
 import Loading from "./Loading";
-import { ButtonUnobtrusive } from "../Repository/Button";
+import { ButtonUnobtrusive } from "./Button";
 
 const FetchMore = ({ loading, hasNextPage, fetchMore, children }) => (
   <div className="FetchMore">

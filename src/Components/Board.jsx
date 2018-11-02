@@ -106,20 +106,22 @@ class Board extends Component {
   render() {
     const { boardId, boardTitle, boardColor, listsOrder } = this.props;
     return (
-      <div className={classnames("board", boardColor)}>
+      <div>
         <Helmet>
           <title>{boardTitle} | Team Estimation Game</title>
         </Helmet>
         <Header />
-        <BoardHeader />
-        <div
-          className="lists-wrapper"
-          onMouseDown={this.handleMouseDown}
-          onWheel={this.handleWheel}
-        >
-          <Lists boardId={boardId} listsOrder={listsOrder} />
+        <div className={classnames("container-fluid", boardColor)}>
+          <BoardHeader />
+          <div
+            className="lists-wrapper"
+            onMouseDown={this.handleMouseDown}
+            onWheel={this.handleWheel}
+          >
+            <Lists boardId={boardId} listsOrder={listsOrder} />
+          </div>
+          <div className="board-underlay" />
         </div>
-        <div className="board-underlay" />
       </div>
     );
   }

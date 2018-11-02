@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import RepositoryList from "./RepositoryList";
-import Loading from "./Loading";
-import FetchMore from "./FetchMore";
+import RepositoryList from "../Repository/RepositoryList";
+import Loading from "../Repository/Loading";
+import FetchMore from "../Repository/FetchMore";
 
 export default class Repositories extends Component {
   constructor(props) {

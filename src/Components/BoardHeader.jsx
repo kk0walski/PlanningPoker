@@ -4,12 +4,14 @@ import ColorPicker from "./ColorPicker";
 import BoardDeleter from "./BoardDeleter";
 
 const BoardHeader = () => (
-  <div className="board-header">
-    <BoardTitle />
-    <div className="board-header-right">
-      <ColorPicker />
-      <div className="vertical-line" />
-      <BoardDeleter />
+  <div className="row">
+    <div className="board-header">
+      <BoardTitle />
+      <div className="board-header-right">
+        <ColorPicker />
+        <div className="vertical-line" />
+        <BoardDeleter />
+      </div>
     </div>
   </div>
 );
