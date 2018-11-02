@@ -15,7 +15,7 @@ const RepositoryItem = ({ name, url, description, language, owner, match }) => (
         dangerouslySetInnerHTML={{ __html: description }}
       />
       <div className="RepositoryItem-description-details">
-        <div>{language && <span>Language: {language.name}</span>}</div>
+        <div>{language && <span>Language: {language}</span>}</div>
         <div>
           {owner && (
             <span>
