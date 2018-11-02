@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Helmet } from "react-helmet";
 import classnames from "classnames";
-import Header from "./Header";
-import Octokit from "@octokit/rest";
+import Header from "../Header";
+import Repositories from "./Repositories";
 
 class Profile extends Component {
   static propTypes = {
@@ -13,9 +13,9 @@ class Profile extends Component {
   };
 
   render() {
-    const { user } = this.props;
+    const { user, match } = this.props;
     return (
-      <div>
+      <div style={{ width: "100%" }}>
         <Helmet>
           <title>Home | Team Estimation Game</title>
         </Helmet>
@@ -58,10 +58,13 @@ class Profile extends Component {
                     "active"
                   )}
                 >
-                  Profil
+                  Repositories
                 </p>
               </li>
             </ul>
+          </div>
+          <div className="repositories">
+            <Repositories match={match} user={user} />
           </div>
         </div>
       </div>

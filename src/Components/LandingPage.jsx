@@ -19,12 +19,15 @@ class LandingPage extends React.Component {
 
   handleSocialLogin = () => {
     var provider = new firebase.auth.GithubAuthProvider();
+    provider.addScope("repo");
+    provider.addScope("user");
     firebase
       .auth()
       .signInWithPopup(provider)
       .then(result => {
-        if (result && result.user) {
-          this.props.enterAsUser(result.user, result.credential.accessToken);
+        if (result && result.credential && result.user) {
+          const token = result.credential.accessToken;
+          this.props.enterAsUser(result.user, token);
         }
       });
   };
@@ -86,7 +89,7 @@ class LandingPage extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  enterAsUser: user => dispatch(enterAsUser(user))
+  enterAsUser: (user, token) => dispatch(enterAsUser(user, token))
 });
 
 export default connect(

@@ -6,6 +6,7 @@
     "@octokit/rest": "^15.15.1",
     "classnames": "^2.2.6",
     "firebase": "^5.5.4",
+    "github-pagination": "^0.1.0",
     "husky": "^1.1.2",
     "lint-staged": "^7.3.0",
     "node-sass": "^4.9.3",
