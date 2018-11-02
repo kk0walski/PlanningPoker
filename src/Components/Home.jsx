@@ -8,7 +8,6 @@ import Header from "./Header";
 import BoardAdder from "./BoardAdder";
 import classnames from "classnames";
 import { firebase } from "../firebase/firebase";
-import { height } from "window-size";
 
 class Home extends Component {
   static propTypes = {

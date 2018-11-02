@@ -39,17 +39,23 @@ export default class OrganisationSearch extends Component {
   render() {
     const { newSearch } = this.state;
     return (
-      <input
-        autoFocus
-        value={newSearch}
-        type="text"
-        onKeyDown={this.handleKeyDown}
-        onChange={this.handleChange}
-        onFocus={this.handleFocus}
-        onBlur={this.revertSearch}
-        className="board-title-input"
-        spellCheck={false}
-      />
+      <div className="row">
+        <div className="col-12">
+          <input
+            autoFocus
+            value={newSearch}
+            type="text"
+            class="form-control"
+            id="search"
+            placeholder="Search Github"
+            onKeyDown={this.handleKeyDown}
+            onChange={this.handleChange}
+            onFocus={this.handleFocus}
+            onBlur={this.revertSearch}
+            spellCheck={false}
+          />
+        </div>
+      </div>
     );
   }
 }

@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { Helmet } from "react-helmet";
 import Header from "../Header";
-import SearchHeader from "./SearchHeader";
-
+import SearchForm from "./OrganisationSearch";
 export default class Organisation extends Component {
   constructor(props) {
     super(props);
@@ -20,17 +19,37 @@ export default class Organisation extends Component {
 
   render() {
     return (
-      <div className="container-fluid">
-        <div className="row">
-          <Helmet>
-            <title>Home | Team Estimation Game</title>
-          </Helmet>
-          <Header />
-          <SearchHeader startSearch={this.startSearch} />
-        </div>
-        <div className="row">
-          <div className="col-8">col-8</div>
-          <div className="col-4">col-4</div>
+      <div style={{ width: "100%" }}>
+        <Helmet>
+          <title>Home | Team Estimation Game</title>
+        </Helmet>
+        <Header />
+        <div id="content" style={{ marginTop: "60px" }}>
+          <div className="container">
+            <SearchForm startSearch={this.startSearch} />
+            <div className="row">
+              <div className="col-4">
+                <ul class="nav flex-column">
+                  <li class="nav-item">
+                    <a class="nav-link active" href="#">
+                      Repos
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">
+                      Issues
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">
+                      Users
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div className="col-8">col-8</div>
+            </div>
+          </div>
         </div>
       </div>
     );
