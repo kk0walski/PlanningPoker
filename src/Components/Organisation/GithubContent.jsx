@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { AppNavigation } from "./AppNavigation";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 
 import { AppContainer, Navigation, Body, Title } from "./containers";
 
@@ -20,14 +20,14 @@ export class GithubContent extends Component {
         </Navigation>
         <Body>
           <Switch>
+            <Route exact path={match.path} component={Home} />
             <Route path={`${match.path}/basic`} component={Basic} />
             <Route path={`${match.path}/renderitems`} component={RenderItems} />
             <Route
               path={`${match.path}/renderitems2`}
               component={RenderItems2}
             />
-            <Route path={`${match.path}/home`} component={Home} />
-            <Route path={match.path} component={Home} />
+            <Redirect to={match.path} />
           </Switch>
         </Body>
       </AppContainer>

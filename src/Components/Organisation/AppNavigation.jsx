@@ -22,7 +22,7 @@ export class AppNavigation extends React.Component {
   render() {
     const { match } = this.props;
     return (
-      <SideNav theme={theme} defaultSelectedPath={`${match.path}/home`}>
+      <SideNav theme={theme} defaultSelectedPath={`${match.path}`}>
         <Nav id="home">
           <NavIcon>
             <Icon icon={home} />
