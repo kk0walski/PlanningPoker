@@ -43,7 +43,6 @@ export default class Organisation extends Component {
                   path={`${match.path}/:search`}
                   component={GithubContent}
                 />
-                <Redirect to={match.path} />
               </Switch>
             </div>
           </div>
