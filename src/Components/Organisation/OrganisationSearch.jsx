@@ -1,8 +1,11 @@
 import React, { Component } from "react";
+import { Route } from "react-router";
+import { GithubContent } from "./GithubContent";
 
 export default class OrganisationSearch extends Component {
   constructor(props) {
     super(props);
+    this.startSearch = this.startSearch.bind(this);
     this.state = {
       newSearch: ""
     };
@@ -12,12 +15,15 @@ export default class OrganisationSearch extends Component {
     this.setState({ newSearch: "" });
   };
 
+  startSearch(text) {
+    this.setState({
+      newSearch: text
+    });
+  }
+
   submitSearch = () => {
     const { newSearch } = this.state;
-    if (newSearch === "") return;
-    else {
-      this.props.startSearch(newSearch);
-    }
+    this.startSearch(newSearch);
   };
 
   handleKeyDown = event => {
@@ -38,24 +44,32 @@ export default class OrganisationSearch extends Component {
 
   render() {
     const { newSearch } = this.state;
-    return (
-      <div className="row">
-        <div className="col-12">
-          <input
-            autoFocus
-            value={newSearch}
-            type="text"
-            class="form-control"
-            id="search"
-            placeholder="Search Github"
-            onKeyDown={this.handleKeyDown}
-            onChange={this.handleChange}
-            onFocus={this.handleFocus}
-            onBlur={this.revertSearch}
-            spellCheck={false}
-          />
+    const { match } = this.props;
+    if (newSearch && newSearch !== "") {
+      console.log("NEW_MATCH: ", match);
+      return (
+        <Route patch={`${match.patch}/:search`} component={GithubContent} />
+      );
+    } else {
+      return (
+        <div className="row">
+          <div className="col-12">
+            <input
+              autoFocus
+              value={newSearch}
+              type="text"
+              className="form-control"
+              id="search"
+              placeholder="Search Github"
+              onKeyDown={this.handleKeyDown}
+              onChange={this.handleChange}
+              onFocus={this.handleFocus}
+              onBlur={this.revertSearch}
+              spellCheck={false}
+            />
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
 }

@@ -2,22 +2,12 @@ import React, { Component } from "react";
 import { Helmet } from "react-helmet";
 import Header from "../Header";
 import SearchForm from "./OrganisationSearch";
+import { GithubContent } from "./GithubContent";
+import { Route, Switch } from "react-router-dom";
 export default class Organisation extends Component {
-  constructor(props) {
-    super(props);
-    this.startSearch = this.startSearch.bind(this);
-    this.state = {
-      search: undefined
-    };
-  }
-
-  startSearch(text) {
-    this.setState({
-      search: text
-    });
-  }
-
   render() {
+    const { match } = this.props;
+    console.log("MATCH: ", match);
     return (
       <div style={{ width: "100%" }}>
         <Helmet>
@@ -26,28 +16,14 @@ export default class Organisation extends Component {
         <Header />
         <div id="content" style={{ marginTop: "60px" }}>
           <div className="container">
-            <SearchForm startSearch={this.startSearch} />
+            <SearchForm match={match} />
             <div className="row">
-              <div className="col-4">
-                <ul class="nav flex-column">
-                  <li class="nav-item">
-                    <a class="nav-link active" href="#">
-                      Repos
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">
-                      Issues
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">
-                      Users
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div className="col-8">col-8</div>
+              <Switch>
+                <Route
+                  path={`${match.path}/:search`}
+                  component={GithubContent}
+                />
+              </Switch>
             </div>
           </div>
         </div>
