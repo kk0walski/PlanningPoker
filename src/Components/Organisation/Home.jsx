@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import RepositoryList from "../Repository/RepositoryList";
 import Loading from "../Repository/Loading";
-import FetchMore from "../Repository/FetchMore";
+import { parser } from "../../utils";
+import Pagination from "react-js-pagination";
 
 class Home extends Component {
   constructor(props) {
     super(props);
     this.search = props.match.params.search;
-    this.octopage = require("github-pagination");
     this.octokit = require("@octokit/rest")({
       timeout: 0,
       headers: {
@@ -40,20 +40,41 @@ class Home extends Component {
         this.setState({
           hasNextPage: this.octokit.hasNextPage(result),
           result,
-          data: result.data.items
+          data: result.data.items,
+          activePage: 1
         });
       });
+  }
+
+  handlePageChange(pageNumber) {
+    console.log(`active page is ${pageNumber}`);
+    this.setState({ activePage: pageNumber });
   }
 
   render() {
     if (this.state.data) {
       const { data, result, hasNextPage } = this.state;
       const { match } = this.props;
-      console.log("DATA: ", result);
+      console.log("REASULT: ", result);
+      console.log("DATA: ", parser(result.headers.link));
       return (
         <div>
           <RepositoryList repositories={data} match={match} />
-          <FetchMore hasNextPage={hasNextPage} fetchMore={this.fetchMore} />
+          <nav
+            aria-label="Page navigation example"
+            style={{ marginTop: "10px" }}
+          >
+            <Pagination
+              activePage={this.state.activePage}
+              itemsCountPerPage={10}
+              totalItemsCount={450}
+              pageRangeDisplayed={5}
+              onChange={this.handlePageChange}
+              innerClass="pagination justify-content-center"
+              itemClass="page-item"
+              linkClass="page-link"
+            />
+          </nav>
         </div>
       );
     } else {
