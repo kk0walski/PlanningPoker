@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import RepositoryList from "../Repository/RepositoryList";
 import Loading from "../Repository/Loading";
-import { parser } from "../../utils";
 import Pagination from "react-js-pagination";
 
 class Home extends Component {
   constructor(props) {
     super(props);
+    this.handlePageChange = this.handlePageChange.bind(this);
     this.search = props.match.params.search;
     this.octokit = require("@octokit/rest")({
       timeout: 0,
@@ -26,7 +26,8 @@ class Home extends Component {
     this.state = {
       hasNextPage: false,
       result: undefined,
-      data: undefined
+      data: undefined,
+      total_count: 0
     };
   }
 
@@ -41,22 +42,33 @@ class Home extends Component {
           hasNextPage: this.octokit.hasNextPage(result),
           result,
           data: result.data.items,
-          activePage: 1
+          activePage: 1,
+          total_count: result.data.total_count
         });
       });
   }
 
   handlePageChange(pageNumber) {
-    console.log(`active page is ${pageNumber}`);
-    this.setState({ activePage: pageNumber });
+    this.octokit.search
+      .repos({
+        q: this.search,
+        per_page: 10,
+        page: pageNumber
+      })
+      .then(result => {
+        this.setState({
+          hasNextPage: this.octokit.hasNextPage(result),
+          result,
+          data: result.data.items,
+          activePage: pageNumber
+        });
+      });
   }
 
   render() {
     if (this.state.data) {
-      const { data, result, hasNextPage } = this.state;
+      const { data } = this.state;
       const { match } = this.props;
-      console.log("REASULT: ", result);
-      console.log("DATA: ", parser(result.headers.link));
       return (
         <div>
           <RepositoryList repositories={data} match={match} />
@@ -67,7 +79,7 @@ class Home extends Component {
             <Pagination
               activePage={this.state.activePage}
               itemsCountPerPage={10}
-              totalItemsCount={450}
+              totalItemsCount={this.state.total_count}
               pageRangeDisplayed={5}
               onChange={this.handlePageChange}
               innerClass="pagination justify-content-center"

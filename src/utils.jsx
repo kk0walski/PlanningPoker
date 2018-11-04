@@ -14,7 +14,7 @@ export const parser = linkStr => {
         if (idx === 1) return /rel="(.+)"/.exec(curr)[1];
       });
     })
-    .reduce(function(obj, curr, i) {
+    .reduce((obj, curr, i) => {
       obj[curr[1]] = curr[0];
       return obj;
     }, {});
