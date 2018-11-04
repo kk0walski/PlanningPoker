@@ -4,6 +4,7 @@ import RepositoryItem from "./RepositoryItem";
 export default class RepositoryList extends Component {
   render() {
     const { repositories, match } = this.props;
+    console.log("REPOSITORIES: ", repositories);
     return (
       <Fragment>
         {repositories.map(repository => (

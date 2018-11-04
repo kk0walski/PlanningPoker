@@ -27,7 +27,7 @@ export class AppNavigation extends React.Component {
           <NavIcon>
             <Icon icon={home} />
           </NavIcon>
-          <Text>Home</Text>
+          <Text>Repos</Text>
         </Nav>
         <Nav id="basic">
           <NavIcon>

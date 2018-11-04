@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Helmet } from "react-helmet";
 import Header from "../Header";
 import SearchForm from "./OrganisationSearch";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { GithubContent } from "./GithubContent";
 import PropTypes from "prop-types";
 export default class Organisation extends Component {

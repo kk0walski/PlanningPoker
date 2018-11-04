@@ -4,7 +4,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 
 import { AppContainer, Navigation, Body, Title } from "./containers";
 
-import { Home } from "./Home";
+import Home from "./Home";
 import { Basic } from "./Basic";
 import { RenderItems } from "./RenderItems";
 import { RenderItems2 } from "./RenderItems2";
