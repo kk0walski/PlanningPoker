@@ -1,60 +1,100 @@
 import React from "react";
-import { SideNav, Nav } from "react-sidenav";
-import styled from "styled-components";
-import {
-  AppContainer as BaseAppContainer,
-  ExampleNavigation as Navigation,
-  ExampleBody as Body
-} from "./containers";
+import { connect } from "react-redux";
+import UserList from "../User/UserList";
+import Loading from "../Repository/Loading";
+import Pagination from "react-js-pagination";
+class Basic extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handlePageChange = this.handlePageChange.bind(this);
+    this.search = props.match.params.search;
+    this.octokit = require("@octokit/rest")({
+      timeout: 0,
+      headers: {
+        accept: "application/vnd.github.v3+json",
+        "user-agent": "octokit/rest.js v1.2.3" // v1.2.3 will be current version
+      },
 
-const AppContainer = styled(BaseAppContainer)`
-  height: calc(100vh - 40px);
-`;
+      // custom GitHub Enterprise URL
+      baseUrl: "https://api.github.com"
+    });
+    this.octokit.authenticate({
+      type: "app",
+      token: props.user.token
+    });
+    this.state = {
+      hasNextPage: false,
+      result: undefined,
+      data: undefined,
+      total_count: 0
+    };
+  }
 
-const theme = {
-  selectionColor: "#C51162"
-};
+  componentWillMount() {
+    this.octokit.search
+      .users({
+        q: this.search,
+        per_page: 10
+      })
+      .then(result => {
+        this.setState({
+          hasNextPage: this.octokit.hasNextPage(result),
+          result,
+          data: result.data.items,
+          activePage: 1,
+          total_count: result.data.total_count
+        });
+      });
+  }
 
-export class Basic extends React.Component {
-  state = { selectedPath: "1" };
-
-  onItemSelection = arg => {
-    this.setState({ selectedPath: arg.path });
-  };
+  handlePageChange(pageNumber) {
+    this.octokit.search
+      .users({
+        q: this.search,
+        per_page: 10,
+        page: pageNumber
+      })
+      .then(result => {
+        this.setState({
+          hasNextPage: this.octokit.hasNextPage(result),
+          result,
+          data: result.data.items,
+          activePage: pageNumber
+        });
+      });
+  }
 
   render() {
-    return (
-      <AppContainer>
-        <Navigation>
-          <SideNav
-            defaultSelectedPath="1"
-            theme={theme}
-            onItemSelection={this.onItemSelection}
+    if (this.state.data) {
+      const { data } = this.state;
+      const { match } = this.props;
+      console.log("DATA: ", data);
+      return (
+        <div>
+          <UserList users={data} match={match} />
+          <nav
+            aria-label="Page navigation example"
+            style={{ marginTop: "10px" }}
           >
-            <Nav id="1">
-              Nav 1<Nav id="1">Nav 1.1</Nav>
-              <Nav id="2">Nav 1.2</Nav>
-            </Nav>
-            <Nav id="2">Nav 2</Nav>
-            <Nav id="3">
-              Nav 3<Nav id="1">Nav 3.1</Nav>
-              <Nav id="2">
-                Nav 3.2
-                <Nav id="1">Nav 3.2.1</Nav>
-                <Nav id="2">Nav 3.2.2</Nav>
-              </Nav>
-            </Nav>
-            <Nav id="4">Nav 4</Nav>
-            <Nav id="5">Nav 5</Nav>
-            <Nav id="4">Nav 6</Nav>
-            <Nav id="5">Nav 7</Nav>
-          </SideNav>
-        </Navigation>
-        <Body>
-          This simple example shows how you can use react-sidenav to create a
-          tree like structure
-        </Body>
-      </AppContainer>
-    );
+            <Pagination
+              activePage={this.state.activePage}
+              itemsCountPerPage={10}
+              totalItemsCount={this.state.total_count}
+              pageRangeDisplayed={10}
+              onChange={this.handlePageChange}
+              innerClass="pagination justify-content-center"
+              itemClass="page-item"
+              linkClass="page-link"
+            />
+          </nav>
+        </div>
+      );
+    } else {
+      return <Loading />;
+    }
   }
 }
+
+const mapStateToProps = ({ user }) => ({ user });
+
+export default connect(mapStateToProps)(Basic);

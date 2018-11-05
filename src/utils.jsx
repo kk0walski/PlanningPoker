@@ -10,8 +10,13 @@ export const parser = linkStr => {
     .split(",")
     .map(function(rel) {
       return rel.split(";").map(function(curr, idx) {
-        if (idx === 0) return /&page=(\d+)/.exec(curr)[1];
-        if (idx === 1) return /rel="(.+)"/.exec(curr)[1];
+        if (idx === 0) {
+          return /&page=(\d+)/.exec(curr)[1];
+        }
+        if (idx === 1) {
+          return /rel="(.+)"/.exec(curr)[1];
+        }
+        return null;
       });
     })
     .reduce((obj, curr, i) => {

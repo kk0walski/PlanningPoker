@@ -80,7 +80,7 @@ class Home extends Component {
               activePage={this.state.activePage}
               itemsCountPerPage={10}
               totalItemsCount={this.state.total_count}
-              pageRangeDisplayed={5}
+              pageRangeDisplayed={10}
               onChange={this.handlePageChange}
               innerClass="pagination justify-content-center"
               itemClass="page-item"
