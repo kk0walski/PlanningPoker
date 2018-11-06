@@ -7,7 +7,6 @@ export default class Repositories extends Component {
   constructor(props) {
     super(props);
     this.fetchMore = this.fetchMore.bind(this);
-    this.octopage = require("github-pagination");
     this.octokit = require("@octokit/rest")({
       timeout: 0,
       headers: {

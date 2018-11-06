@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const RepositoryItem = ({ name, url, description, language, owner, match }) => (
+const RepositoryItem = ({ name, url, description, language, owner }) => (
   <div>
     <div className="RepositoryItem-title">
       <h2>
-        <Link to={`${match.url}/${owner.login}/${name}`}>{name}</Link>
+        <Link to={`repository/${owner.login}/${name}`}>{name}</Link>
       </h2>
     </div>
 

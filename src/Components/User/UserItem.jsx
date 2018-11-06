@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Loading from "./Loading";
 import classnames from "classnames";
+import { Link } from "react-router-dom";
 
 export default class UserItem extends Component {
   constructor(props) {
@@ -47,9 +48,9 @@ export default class UserItem extends Component {
             height={48}
           />
           <div className={classnames("user-list-info", "ml-2", "min-width-0")}>
-            <a>
+            <Link to={`user/${login}`}>
               <em>{login}</em>
-            </a>
+            </Link>
             <div
               className={classnames(
                 "d-block",

@@ -4,7 +4,7 @@ import classnames from "classnames";
 
 export default class UserList extends Component {
   render() {
-    const { users, match } = this.props;
+    const { users } = this.props;
     return (
       <Fragment>
         {users.map(user => (
@@ -12,7 +12,7 @@ export default class UserList extends Component {
             key={user.node_id}
             className={classnames("user-list-item", "f5", "py-4", "d-flex")}
           >
-            <UserItem {...user} match={match} />
+            <UserItem {...user} />
           </div>
         ))}
       </Fragment>

@@ -12,6 +12,7 @@
     "normalize.css": "^8.0.0",
     "prettier": "^1.14.3",
     "pretty-quick": "^1.8.0",
+    "query-string": "^6.2.0",
     "react": "^16.5.2",
     "react-aria-menubutton": "^6.0.1",
     "react-beautiful-dnd": "^9.0.2",

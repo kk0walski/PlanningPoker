@@ -2,32 +2,47 @@ import React, { Component } from "react";
 import { Helmet } from "react-helmet";
 import Header from "../Header";
 import SearchForm from "./OrganisationSearch";
-import { Route, Switch } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { GithubContent } from "./GithubContent";
 import PropTypes from "prop-types";
-export default class Organisation extends Component {
-  static contextTypes = {
-    router: PropTypes.object
+class Organisation extends Component {
+  static propTypes = {
+    history: PropTypes.object.isRequired
   };
 
   constructor(props) {
     super(props);
     this.startSearch = this.startSearch.bind(this);
+    this.menuSelection = this.menuSelection.bind(this);
     this.state = {
-      newSearch: undefined
+      newSearch: undefined,
+      type: "repos"
     };
   }
 
   startSearch(text) {
-    const { match } = this.props;
     this.setState({
       newSearch: text
     });
-    this.context.router.history.push(`${match.path}/${text}`);
+    this.props.history.push({
+      search: `query=${text}`
+    });
+  }
+
+  menuSelection(arg) {
+    if (arg.id === "users") {
+      this.props.history.push({
+        search: `query=${this.state.newSearch}&type=users`
+      });
+    } else if (arg.id === "repos") {
+      this.props.history.push({
+        search: `query=${this.state.newSearch}&type=repos`
+      });
+    }
   }
 
   render() {
-    const { match } = this.props;
+    const { match, location } = this.props;
     return (
       <div style={{ width: "100%" }}>
         <Helmet>
@@ -38,12 +53,12 @@ export default class Organisation extends Component {
           <div className="container">
             <SearchForm startSearch={this.startSearch} match={match} />
             <div className="row">
-              <Switch>
-                <Route
-                  path={`${match.path}/:search`}
-                  component={GithubContent}
+              {location.search && (
+                <GithubContent
+                  match={match}
+                  menuSelection={this.menuSelection}
                 />
-              </Switch>
+              )}
             </div>
           </div>
         </div>
@@ -51,3 +66,5 @@ export default class Organisation extends Component {
     );
   }
 }
+
+export default withRouter(Organisation);

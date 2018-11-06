@@ -14,13 +14,13 @@ export class GithubContent extends Component {
       <AppContainer>
         <Navigation>
           <Title> React SideNav </Title>
-          <AppNavigation match={match} />
+          <AppNavigation menuSelection={this.props.menuSelection} />
         </Navigation>
         <Body>
           <Switch>
             <Route exact path={match.path} component={Home} />
             <Route path={`${match.path}/basic`} component={Basic} />
-            <Redirect to={match.path} />
+            <Redirect to="/" />
           </Switch>
         </Body>
       </AppContainer>
