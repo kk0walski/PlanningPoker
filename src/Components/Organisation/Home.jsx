@@ -10,9 +10,7 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.handlePageChange = this.handlePageChange.bind(this);
-    console.log("PROPS: ", queryString(props.location.search));
-    const params = queryString(props.location.search).query;
-    console.log("PARAMS: ", params);
+    const searchParams = queryString.parse(props.location.search);
     this.octokit = require("@octokit/rest")({
       timeout: 0,
       headers: {
@@ -32,19 +30,19 @@ class Home extends Component {
       result: undefined,
       data: undefined,
       total_count: 0,
-      search: params.query,
-      type: undefined
+      search: searchParams.query,
+      type: "repos"
     };
   }
 
   componentWillReceiveProps(nextProps) {
     const newQuery = queryString.parse(nextProps.location.search);
     if (
-      this.state.search !== newQuery.search ||
-      this.state.type !== newQuery.search
+      this.state.search !== newQuery.query ||
+      this.state.type !== newQuery.type
     ) {
       this.setState({
-        search: newQuery.search,
+        search: newQuery.query,
         type: newQuery.type,
         activePage: 1
       });
@@ -83,7 +81,7 @@ class Home extends Component {
   componentWillMount() {
     this.octokit.search
       .repos({
-        q: this.search,
+        q: this.state.search,
         per_page: 10
       })
       .then(result => {
@@ -117,6 +115,7 @@ class Home extends Component {
   render() {
     if (this.state.data) {
       const { data, type } = this.state;
+      console.log("DATA: ", data);
       if (type === "users") {
         return (
           <div>
@@ -138,7 +137,7 @@ class Home extends Component {
             </nav>
           </div>
         );
-      } else {
+      } else if (type === "repos") {
         return (
           <div>
             <RepositoryList repositories={data} />
@@ -159,6 +158,8 @@ class Home extends Component {
             </nav>
           </div>
         );
+      } else {
+        return <Loading />;
       }
     } else {
       return <Loading />;

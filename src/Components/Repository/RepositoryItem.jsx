@@ -1,31 +1,39 @@
-import React from "react";
+import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import Loading from "./Loading";
 
-const RepositoryItem = ({ name, url, description, language, owner }) => (
-  <div>
-    <div className="RepositoryItem-title">
-      <h2>
-        <Link to={`repository/${owner.login}/${name}`}>{name}</Link>
-      </h2>
-    </div>
-
-    <div className="RepositoryItem-description">
-      <div
-        className="RepositoryItem-description-info"
-        dangerouslySetInnerHTML={{ __html: description }}
-      />
-      <div className="RepositoryItem-description-details">
-        <div>{language && <span>Language: {language}</span>}</div>
+export default class RepositoryItem extends Component {
+  render() {
+    const { name, description, language, owner } = this.props;
+    if (owner) {
+      return (
         <div>
-          {owner && (
-            <span>
-              Owner: <a href={owner.url}>{owner.login}</a>
-            </span>
-          )}
-        </div>
-      </div>
-    </div>
-  </div>
-);
+          <div className="RepositoryItem-title">
+            <h2>
+              <Link to={`repository/${owner.login}/${name}`}>{name}</Link>
+            </h2>
+          </div>
 
-export default RepositoryItem;
+          <div className="RepositoryItem-description">
+            <div
+              className="RepositoryItem-description-info"
+              dangerouslySetInnerHTML={{ __html: description }}
+            />
+            <div className="RepositoryItem-description-details">
+              <div>{language && <span>Language: {language}</span>}</div>
+              <div>
+                {owner && (
+                  <span>
+                    Owner: <a href={owner.url}>{owner.login}</a>
+                  </span>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    } else {
+      return <Loading />;
+    }
+  }
+}

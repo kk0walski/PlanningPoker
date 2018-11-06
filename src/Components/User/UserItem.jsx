@@ -36,7 +36,6 @@ export default class UserItem extends Component {
       );
     } else {
       const { avatar_url, bio, login, name } = this.state.dataSource;
-      console.log("DATA: ", this.state.dataSource);
       return (
         <div className={classnames("d-flex", "flex-auto")}>
           <img
