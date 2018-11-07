@@ -10,7 +10,7 @@ export default class RepositoryItem extends Component {
         <div>
           <div className="RepositoryItem-title">
             <h2>
-              <Link to={`repository/${owner.login}/${name}`}>{name}</Link>
+              <Link to={`/repository/${owner.login}/${name}`}>{name}</Link>
             </h2>
           </div>
 

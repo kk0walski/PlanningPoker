@@ -9,11 +9,20 @@ import Profile from "./Components/Profile";
 import { justAddBoard, justRemoveBoard } from "./actions/Board";
 import Organisation from "./Components/Organisation";
 import db from "./firebase/firebase";
+import OrganisationIssues from "./Components/Issues";
+import User from "./Components/User";
 
 class App extends Component {
   static propTypes = {
     user: PropTypes.object
   };
+
+  constructor(props) {
+    super(props);
+    this.boards = function() {
+      console.log("Przykładowa funkcja");
+    };
+  }
 
   componentDidUpdate(prevProps) {
     if (this.props.user) {
@@ -62,6 +71,11 @@ class App extends Component {
           <Route path="/b/:boardId" component={BoardContainer} />
           <Route path="/profile" component={Profile} />
           <Route path="/organisation" component={Organisation} />
+          <Route
+            path="/repository/:owner/:name"
+            component={OrganisationIssues}
+          />
+          <Route path="/user/:login" component={User} />
           <Redirect to="/" />
         </Switch>
       );
