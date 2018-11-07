@@ -39,15 +39,10 @@ class Home extends Component {
       this.state.search !== newQuery.query ||
       this.state.type !== newQuery.type
     ) {
-      this.setState({
-        search: newQuery.query,
-        type: newQuery.type,
-        activePage: 1
-      });
       if (newQuery.type === "users") {
         this.octokit.search
           .users({
-            q: this.state.search,
+            q: newQuery.query,
             per_page: 10,
             page: 1
           })
@@ -55,13 +50,16 @@ class Home extends Component {
             this.setState({
               hasNextPage: this.octokit.hasNextPage(result),
               result,
-              data: result.data.items
+              data: result.data.items,
+              search: newQuery.query,
+              type: newQuery.type,
+              activePage: 1
             });
           });
-      } else if (newQuery.type === "repos") {
+      } else {
         this.octokit.search
           .repos({
-            q: this.state.search,
+            q: newQuery.query,
             per_page: 10,
             page: 1
           })
@@ -69,14 +67,17 @@ class Home extends Component {
             this.setState({
               hasNextPage: this.octokit.hasNextPage(result),
               result,
-              data: result.data.items
+              data: result.data.items,
+              search: newQuery.query,
+              type: newQuery.type,
+              activePage: 1
             });
           });
       }
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.octokit.search
       .repos({
         q: this.state.search,
