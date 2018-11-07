@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import RepositoryList from "../Repository/RepositoryList";
+import DataList from "./DataList";
 import Loading from "../Repository/Loading";
 import Pagination from "react-js-pagination";
 import queryString from "query-string";
-import UserList from "../User/UserList";
-
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -115,52 +113,26 @@ class Home extends Component {
   render() {
     if (this.state.data) {
       const { data, type } = this.state;
-      console.log("DATA: ", data);
-      if (type === "users") {
-        return (
-          <div>
-            <UserList users={data} />
-            <nav
-              aria-label="Page navigation example"
-              style={{ marginTop: "10px" }}
-            >
-              <Pagination
-                activePage={this.state.activePage}
-                itemsCountPerPage={10}
-                totalItemsCount={this.state.total_count}
-                pageRangeDisplayed={10}
-                onChange={this.handlePageChange}
-                innerClass="pagination justify-content-center"
-                itemClass="page-item"
-                linkClass="page-link"
-              />
-            </nav>
-          </div>
-        );
-      } else if (type === "repos") {
-        return (
-          <div>
-            <RepositoryList repositories={data} />
-            <nav
-              aria-label="Page navigation example"
-              style={{ marginTop: "10px" }}
-            >
-              <Pagination
-                activePage={this.state.activePage}
-                itemsCountPerPage={10}
-                totalItemsCount={this.state.total_count}
-                pageRangeDisplayed={10}
-                onChange={this.handlePageChange}
-                innerClass="pagination justify-content-center"
-                itemClass="page-item"
-                linkClass="page-link"
-              />
-            </nav>
-          </div>
-        );
-      } else {
-        return <Loading />;
-      }
+      return (
+        <div>
+          <DataList data={data} type={type} />
+          <nav
+            aria-label="Page navigation example"
+            style={{ marginTop: "10px" }}
+          >
+            <Pagination
+              activePage={this.state.activePage}
+              itemsCountPerPage={10}
+              totalItemsCount={this.state.total_count}
+              pageRangeDisplayed={10}
+              onChange={this.handlePageChange}
+              innerClass="pagination justify-content-center"
+              itemClass="page-item"
+              linkClass="page-link"
+            />
+          </nav>
+        </div>
+      );
     } else {
       return <Loading />;
     }
