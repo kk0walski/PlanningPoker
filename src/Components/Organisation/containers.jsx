@@ -10,7 +10,6 @@ export const Navigation = styled.div`
   width: 220px;
   flex-shrink: 0;
   background: #fff;
-  height: 100vh;
   border-right: 1px solid rgba(0, 0, 0, 0.125);
 `;
 export const Body = styled.div`
