@@ -9,7 +9,6 @@ import Repositories from "./Repositories";
 class User extends Component {
   constructor(props) {
     super(props);
-    console.log("PROPS", props);
     const { login } = props.match.params;
     this.octokit = require("@octokit/rest")({
       timeout: 0,

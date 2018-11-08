@@ -8,6 +8,7 @@ import Calendar from "./Calendar";
 import ClickOutside from "./ClickOutside";
 import colorIcon from "../assets/images/color-icon.png";
 import { startChangeCardColor, startArchiveCard } from "../actions/Cards";
+import Labels from "./Labels";
 
 class CardOptions extends Component {
   static propTypes = {
@@ -17,7 +18,8 @@ class CardOptions extends Component {
     isCardNearRightBorder: PropTypes.bool.isRequired,
     isThinDisplay: PropTypes.bool.isRequired,
     boundingRect: PropTypes.object.isRequired,
-    toggleColorPicker: PropTypes.func.isRequired
+    toggleColorPicker: PropTypes.func.isRequired,
+    toggleLabelPicker: PropTypes.func.isRequired
   };
 
   constructor() {
@@ -61,9 +63,12 @@ class CardOptions extends Component {
       isCardNearRightBorder,
       isColorPickerOpen,
       toggleColorPicker,
+      isLabelPickerOpen,
+      toggleLabelPicker,
       card,
       boardId,
       isThinDisplay,
+      labels,
       boundingRect
     } = this.props;
     const { isCalendarOpen } = this.state;
@@ -133,6 +138,30 @@ class CardOptions extends Component {
                   )
                 )}
               </div>
+            </ClickOutside>
+          )}
+        </div>
+        <div>
+          <button
+            className="options-list-button"
+            onClick={toggleLabelPicker}
+            onKeyDown={this.handleKeyDown}
+            ref={ref => {
+              this.labelPickerButton = ref;
+            }}
+            aria-haspopup
+            aria-expanded={isLabelPickerOpen}
+          >
+            <div className="modal-icon" />
+            &nbsp;Labels
+          </button>
+          {isLabelPickerOpen && (
+            <ClickOutside
+              eventTypes="click"
+              handleClickOutside={this.toggleLabelClickOutside}
+            >
+              {/* eslint-disable */}
+              <Labels boardId={boardId} labels={labels} card={card} />
             </ClickOutside>
           )}
         </div>

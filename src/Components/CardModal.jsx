@@ -75,6 +75,7 @@ class CardModal extends Component {
       listId,
       boardId,
       checkboxes,
+      labels,
       isOpen
     } = this.props;
     if (!cardElement) {
@@ -174,6 +175,7 @@ class CardModal extends Component {
           isLabelPickerOpen={isLabelPickerOpen}
           card={card}
           listId={listId}
+          labels={labels}
           boardId={boardId}
           boundingRect={boundingRect}
           isCardNearRightBorder={isCardNearRightBorder}

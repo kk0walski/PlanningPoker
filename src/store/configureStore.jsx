@@ -2,6 +2,7 @@ import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import Board from "../reducers/Board";
 import Cards from "../reducers/Cards";
 import Lists from "../reducers/Lists";
+import Labels from "../reducers/Labels";
 import user from "../reducers/user";
 import thunk from "redux-thunk";
 
@@ -12,6 +13,7 @@ export default () => {
     Board,
     Cards,
     Lists,
+    Labels,
     user
   });
 

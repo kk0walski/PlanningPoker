@@ -7,6 +7,7 @@ import CardDetailModal from "./CardWindow";
 import { FaPencilAlt } from "react-icons/fa";
 import CardBadges from "./CardBadges";
 import { findCheckboxes } from "../utils";
+import CardLabels from "./CardLabels";
 
 class Card extends Component {
   constructor(props) {
@@ -63,6 +64,7 @@ class Card extends Component {
       card,
       index,
       listId,
+      labels,
       boardId,
       listTitle,
       isDraggingOver
@@ -120,6 +122,7 @@ class Card extends Component {
                         checkboxes={checkboxes}
                       />
                     )}
+                    <CardLabels cardId={card.id} labels={labels} />
                   </div>
                 </div>
                 {/* Remove placeholder when not dragging over to reduce snapping */}
@@ -132,6 +135,7 @@ class Card extends Component {
             cardElement={this.ref}
             card={card}
             listId={listId}
+            labels={labels}
             boardId={boardId}
             checkboxes={checkboxes}
             toggleCardEditor={this.toggleCardEditor}
@@ -141,6 +145,7 @@ class Card extends Component {
             cardElement={this.ref}
             card={card}
             listId={listId}
+            labels={labels}
             boardId={boardId}
             listTitle={listTitle}
             toggleCardEditor={this.toggleCardDetailsEditor}
@@ -157,7 +162,8 @@ const mapStateToProps = (state, ownProps) => ({
   boardId: ownProps.boardId,
   card: ownProps.card,
   listId: ownProps.listId,
-  listTitle: ownProps.listTitle
+  listTitle: ownProps.listTitle,
+  labels: state.Labels[ownProps.boardId] ? state.Labels[ownProps.boardId] : []
 });
 
 export default connect(mapStateToProps)(Card);
