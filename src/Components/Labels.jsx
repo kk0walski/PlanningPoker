@@ -16,18 +16,16 @@ import {
 class Labels extends Component {
   static propTypes = {
     boardId: PropTypes.string.isRequired,
-    labels: PropTypes.arrayOf(
-      PropTypes.shape({
-        labelId: PropTypes.string.isRequired,
-        labelColor: PropTypes.string.isRequired,
-        labelText: PropTypes.string.isRequired,
-        cards: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired
-      })
-    ).isRequired
+    labels: PropTypes.arrayOf(PropTypes.object).isRequired,
+    card: PropTypes.object.isRequired
   };
 
   constructor() {
     super();
+    this.toggleEditOpen = this.toggleEditOpen.bind(this);
+    this.handleAdd = this.handleAdd.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.state = {
       isEditOpen: false,
       isAddOpen: false,
@@ -121,30 +119,28 @@ class Labels extends Component {
   };
 
   render() {
-    const { card, labels } = this.props;
+    const { labels, card, cards } = this.props;
     const { isEditOpen, editLabel } = this.state;
-    return (
-      <div className="modal-color-picker" onKeyDown={this.handleKeyDown}>
-        <div className="pop-over-header js-pop-over-header">
-          <p className="pop-over-header-back-btn icon-sm">
-            <FaArrowLeft />
-          </p>
-          <span className="pop-over-header-title">
-            {isEditOpen
-              ? editLabel
-                ? "Edycja Etykiety"
-                : "Dodaj Etykietę"
-              : "Etykiety"}
-          </span>
-        </div>
-        {isEditOpen ? (
-          editLabel ? (
+    console.log(cards);
+    if (isEditOpen) {
+      if (editLabel) {
+        return (
+          <div className="modal-color-picker" onKeyDown={this.handleKeyDown}>
+            <div className="pop-over-header js-pop-over-header">
+              <button
+                onClick={e => this.toggleEditOpen(e, undefined)}
+                className="pop-over-header-back-btn icon-sm"
+              >
+                <FaArrowLeft />
+              </button>
+              <span className="pop-over-header-title">Edyjca etykiety</span>
+            </div>
             <div>
               <form
                 className="edit-label"
                 onSubmit={this.handleSubmit.bind(this)}
               >
-                <label for="labelName">Nazwa</label>
+                <label htmlFor="labelName">Nazwa</label>
                 <input
                   id="labelName"
                   className="js-autofocus js-label-name"
@@ -169,6 +165,7 @@ class Labels extends Component {
                   ].map(color => (
                     <span
                       className="card-label mod-edit-label"
+                      key={color}
                       color={color}
                       style={{ background: color }}
                       onClick={e => this.setColor(e, color)}
@@ -194,10 +191,23 @@ class Labels extends Component {
                 </div>
               </form>
             </div>
-          ) : (
+          </div>
+        );
+      } else {
+        return (
+          <div className="modal-color-picker" onKeyDown={this.handleKeyDown}>
+            <div className="pop-over-header js-pop-over-header">
+              <button
+                onClick={e => this.toggleEditOpen(e, undefined)}
+                className="pop-over-header-back-btn icon-sm"
+              >
+                <FaArrowLeft />
+              </button>
+              <span className="pop-over-header-title">Dodaj etykiete</span>
+            </div>
             <div>
               <form className="edit-label" onSubmit={this.handleAdd.bind(this)}>
-                <label for="labelName">Nazwa</label>
+                <label htmlFor="labelName">Nazwa</label>
                 <input
                   id="labelName"
                   className="js-autofocus js-label-name"
@@ -222,6 +232,7 @@ class Labels extends Component {
                   ].map(color => (
                     <span
                       className="card-label mod-edit-label"
+                      key={color}
                       color={color}
                       style={{ background: color }}
                       onClick={e => this.setColor(e, color)}
@@ -239,24 +250,31 @@ class Labels extends Component {
                 </div>
               </form>
             </div>
-          )
-        ) : (
+          </div>
+        );
+      }
+    } else {
+      return (
+        <div className="modal-color-picker" onKeyDown={this.handleKeyDown}>
+          <div className="pop-over-header js-pop-over-header">
+            <span className="pop-over-header-title">Etykiety</span>
+          </div>
           <div>
             {/* eslint-enable */}
             <input
               type="text"
               placeholder="Szukaj etykiet..."
-              autocomplete="off"
+              autoComplete="off"
             />
             <ul className="edit-labels-pop-over">
               {labels.map(element => (
-                <li>
-                  <a
+                <li key={element.id}>
+                  <button
                     className="card-label-edit-button icon-sm icon-edit"
                     onClick={e => this.toggleEditOpen(e, element)}
                   >
                     <FaPencilAlt />
-                  </a>
+                  </button>
                   <span
                     className="card-label mod-selectable"
                     style={{ background: element.color }}
@@ -275,19 +293,27 @@ class Labels extends Component {
               ))}
             </ul>
             <div>
-              <a
+              <button
                 className="quiet-button"
                 onClick={e => this.toggleEditOpen(e, undefined)}
               >
                 Utwórz nową etykietę
-              </a>
+              </button>
             </div>
           </div>
-        )}
-      </div>
-    );
+        </div>
+      );
+    }
   }
 }
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    boardId: ownProps.boardId,
+    labels: ownProps.labels,
+    card: ownProps.card
+  };
+};
 
 const mapDispatchToProps = dispatch => ({
   startAddLabel: label => dispatch(startAddLabel(label)),
@@ -304,6 +330,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(
-  undefined,
+  mapStateToProps,
   mapDispatchToProps
 )(Labels);

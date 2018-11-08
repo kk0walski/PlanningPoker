@@ -4,13 +4,7 @@ import PropTypes from "prop-types";
 class CardLabels extends React.Component {
   static propTypes = {
     cardId: PropTypes.string.isRequired,
-    labels: PropTypes.arrayOf(
-      PropTypes.shape({
-        labelId: PropTypes.string.isRequired,
-        labelColor: PropTypes.string.isRequired,
-        labelText: PropTypes.string.isRequired
-      })
-    ).isRequired
+    labels: PropTypes.arrayOf(PropTypes.object).isRequired
   };
 
   render() {
