@@ -54,6 +54,12 @@ class CardOptions extends Component {
     this.colorPickerButton.focus();
   };
 
+  toggleLabelClickOutside = () => {
+    const { toggleLabelPicker } = this.props;
+    toggleLabelPicker();
+    this.labelPickerButton.focus();
+  };
+
   toggleCalendar = () => {
     this.setState({ isCalendarOpen: !this.state.isCalendarOpen });
   };
