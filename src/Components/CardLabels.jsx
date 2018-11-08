@@ -14,9 +14,10 @@ class CardLabels extends React.Component {
         {labels.map(
           label =>
             label.cards !== undefined &&
-            label.cards[cardId] !== undefined && (
+            label.cards.includes(cardId) && (
               <span
                 className="card-label mod-card-front"
+                key={label.id}
                 color={label.color}
                 style={{ background: label.color }}
               />

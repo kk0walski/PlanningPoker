@@ -45,9 +45,6 @@ export const startChangeLabelText = (boardId, labelId, labelText) => {
       .doc(labelId.toString())
       .update({
         text: labelText
-      })
-      .then(() => {
-        dispatch(changeLabelText(boardId, labelId, labelText));
       });
   };
 };
@@ -69,9 +66,6 @@ export const startChangeLabelColor = (boardId, labelId, labelColor) => {
       .doc(labelId.toString())
       .update({
         color: labelColor
-      })
-      .then(() => {
-        dispatch(changeLabelText(boardId, labelId, labelColor));
       });
   };
 };
@@ -93,9 +87,6 @@ export const startDeleteCardFromLabel = (boardId, labelId, cardId) => {
       .doc(labelId.toString())
       .update({
         cards: firebase.firestore.FieldValue.arrayRemove(cardId.toString())
-      })
-      .then(() => {
-        dispatch(deleteCardFromLabel(boardId, labelId, cardId));
       });
   };
 };
@@ -117,9 +108,6 @@ export const startAddCardToLabel = (boardId, labelId, cardId) => {
       .doc(labelId.toString())
       .update({
         cards: firebase.firestore.FieldValue.arrayUnion(cardId.toString())
-      })
-      .then(() => {
-        dispatch(deleteCardFromLabel(boardId, labelId, cardId));
       });
   };
 };

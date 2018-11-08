@@ -26,6 +26,7 @@ class Labels extends Component {
     this.handleAdd = this.handleAdd.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.addLabel = this.addLabel.bind(this);
     this.state = {
       isEditOpen: false,
       isAddOpen: false,
@@ -81,7 +82,6 @@ class Labels extends Component {
   }
 
   toggleEditOpen(event, label) {
-    console.log("TOGGLE EDIT: ", label);
     if (label) {
       this.setState({
         isEditOpen: !this.state.isEditOpen,
@@ -112,7 +112,7 @@ class Labels extends Component {
   addLabel = (event, label) => {
     event.preventDefault();
     const { card, boardId } = this.props;
-    if (label.cards !== undefined && label.cards[card.id] !== undefined) {
+    if (label.cards !== undefined && label.cards.includes(card.id)) {
       this.props.startDeleteCardFromLabel(boardId, label.id, card.id);
     } else {
       this.props.startAddCardToLabel(boardId, label.id, card.id);
@@ -283,7 +283,7 @@ class Labels extends Component {
                   >
                     {element.text}
                     {element.cards !== undefined &&
-                      element.cards[card.id] !== undefined && (
+                      element.cards.includes(card.id) && (
                         <span className="icon-sm icon-check card-label-selectable-icon light">
                           <FaCheck />
                         </span>

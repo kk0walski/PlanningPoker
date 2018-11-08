@@ -1,7 +1,7 @@
 const Labels = (state = {}, action) => {
   switch (action.type) {
     case "ADD_LABEL": {
-      const { boardId, id, text, color } = action.payload;
+      const { boardId, id, text, color, cards } = action.payload;
       return {
         ...state,
         [boardId]: {
@@ -10,7 +10,7 @@ const Labels = (state = {}, action) => {
             id,
             text,
             color,
-            cards: {}
+            cards
           }
         }
       };

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Modal from "react-modal";
 import { FaArchive } from "react-icons/fa";
-import { MdAccessAlarm } from "react-icons/md";
+import { MdAccessAlarm, MdLabel } from "react-icons/md";
 import Calendar from "./Calendar";
 import ClickOutside from "./ClickOutside";
 import colorIcon from "../assets/images/color-icon.png";
@@ -158,7 +158,9 @@ class CardOptions extends Component {
             aria-haspopup
             aria-expanded={isLabelPickerOpen}
           >
-            <div className="modal-icon" />
+            <div className="modal-icon">
+              <MdLabel />
+            </div>
             &nbsp;Labels
           </button>
           {isLabelPickerOpen && (
