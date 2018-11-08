@@ -16,13 +16,13 @@ class CardLabels extends React.Component {
   render() {
     const { labels, cardId } = this.props;
     return (
-      <div class="list-card-labels">
+      <div className="list-card-labels">
         {labels.map(
           label =>
             label.cards !== undefined &&
             label.cards[cardId] !== undefined && (
               <span
-                class="card-label mod-card-front"
+                className="card-label mod-card-front"
                 color={label.color}
                 style={{ background: label.color }}
               />

@@ -125,11 +125,11 @@ class Labels extends Component {
     const { isEditOpen, editLabel } = this.state;
     return (
       <div className="modal-color-picker" onKeyDown={this.handleKeyDown}>
-        <div class="pop-over-header js-pop-over-header">
-          <p class="pop-over-header-back-btn icon-sm">
+        <div className="pop-over-header js-pop-over-header">
+          <p className="pop-over-header-back-btn icon-sm">
             <FaArrowLeft />
           </p>
-          <span class="pop-over-header-title">
+          <span className="pop-over-header-title">
             {isEditOpen
               ? editLabel
                 ? "Edycja Etykiety"
@@ -140,11 +140,14 @@ class Labels extends Component {
         {isEditOpen ? (
           editLabel ? (
             <div>
-              <form class="edit-label" onSubmit={this.handleSubmit.bind(this)}>
+              <form
+                className="edit-label"
+                onSubmit={this.handleSubmit.bind(this)}
+              >
                 <label for="labelName">Nazwa</label>
                 <input
                   id="labelName"
-                  class="js-autofocus js-label-name"
+                  className="js-autofocus js-label-name"
                   onChange={e => this.setText(e, e.target.value)}
                   type="text"
                   name="name"
@@ -165,7 +168,7 @@ class Labels extends Component {
                     "#4d4d4d"
                   ].map(color => (
                     <span
-                      class="card-label mod-edit-label"
+                      className="card-label mod-edit-label"
                       color={color}
                       style={{ background: color }}
                       onClick={e => this.setColor(e, color)}
@@ -174,14 +177,18 @@ class Labels extends Component {
                     </span>
                   ))}
                 </div>
-                <div class="u-clearfix">
-                  <input class="primary wide" type="submit" value="Zapisz" />
-                  <div class="u-float-right">
+                <div className="u-clearfix">
+                  <input
+                    className="primary wide"
+                    type="submit"
+                    value="Zapisz"
+                  />
+                  <div className="u-float-right">
                     <input
                       type="submit"
                       value="Usuń"
                       onClick={this.handleDelete.bind(this)}
-                      class="negate"
+                      className="negate"
                     />
                   </div>
                 </div>
@@ -189,11 +196,11 @@ class Labels extends Component {
             </div>
           ) : (
             <div>
-              <form class="edit-label" onSubmit={this.handleAdd.bind(this)}>
+              <form className="edit-label" onSubmit={this.handleAdd.bind(this)}>
                 <label for="labelName">Nazwa</label>
                 <input
                   id="labelName"
-                  class="js-autofocus js-label-name"
+                  className="js-autofocus js-label-name"
                   onChange={e => this.setText(e, e.target.value)}
                   type="text"
                   name="name"
@@ -214,7 +221,7 @@ class Labels extends Component {
                     "#4d4d4d"
                   ].map(color => (
                     <span
-                      class="card-label mod-edit-label"
+                      className="card-label mod-edit-label"
                       color={color}
                       style={{ background: color }}
                       onClick={e => this.setColor(e, color)}
@@ -223,9 +230,9 @@ class Labels extends Component {
                     </span>
                   ))}
                 </div>
-                <div class="u-clearfix">
+                <div className="u-clearfix">
                   <input
-                    class="primary wide js-submit"
+                    className="primary wide js-submit"
                     type="submit"
                     value="Utwórz"
                   />
@@ -241,11 +248,11 @@ class Labels extends Component {
               placeholder="Szukaj etykiet..."
               autocomplete="off"
             />
-            <ul class="edit-labels-pop-over">
+            <ul className="edit-labels-pop-over">
               {labels.map(element => (
                 <li>
                   <a
-                    class="card-label-edit-button icon-sm icon-edit"
+                    className="card-label-edit-button icon-sm icon-edit"
                     onClick={e => this.toggleEditOpen(e, element)}
                   >
                     <FaPencilAlt />
@@ -259,7 +266,7 @@ class Labels extends Component {
                     {element.text}
                     {element.cards !== undefined &&
                       element.cards[card.id] !== undefined && (
-                        <span class="icon-sm icon-check card-label-selectable-icon light">
+                        <span className="icon-sm icon-check card-label-selectable-icon light">
                           <FaCheck />
                         </span>
                       )}
@@ -269,7 +276,7 @@ class Labels extends Component {
             </ul>
             <div>
               <a
-                class="quiet-button"
+                className="quiet-button"
                 onClick={e => this.toggleEditOpen(e, undefined)}
               >
                 Utwórz nową etykietę

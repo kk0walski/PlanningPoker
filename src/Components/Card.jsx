@@ -163,7 +163,9 @@ const mapStateToProps = (state, ownProps) => ({
   card: ownProps.card,
   listId: ownProps.listId,
   listTitle: ownProps.listTitle,
-  labels: state.Labels[ownProps.boardId] ? state.Labels[ownProps.boardId] : []
+  labels: state.Labels[ownProps.boardId]
+    ? Object.values(state.Labels[ownProps.boardId])
+    : []
 });
 
 export default connect(mapStateToProps)(Card);
