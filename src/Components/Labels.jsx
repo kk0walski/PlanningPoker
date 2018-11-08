@@ -81,16 +81,17 @@ class Labels extends Component {
   }
 
   toggleEditOpen(event, label) {
+    console.log("TOGGLE EDIT: ", label);
     if (label) {
       this.setState({
-        isEditOpen: !this.state.editLabel,
+        isEditOpen: !this.state.isEditOpen,
         editLabel: label,
         newColor: label.color,
         newText: label.text
       });
     } else {
       this.setState({
-        isEditOpen: !this.state.editLabel
+        isEditOpen: !this.state.isEditOpen
       });
     }
   }
@@ -119,9 +120,8 @@ class Labels extends Component {
   };
 
   render() {
-    const { labels, card, cards } = this.props;
+    const { labels, card } = this.props;
     const { isEditOpen, editLabel } = this.state;
-    console.log(cards);
     if (isEditOpen) {
       if (editLabel) {
         return (
