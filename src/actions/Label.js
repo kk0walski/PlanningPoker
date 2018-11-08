@@ -6,6 +6,12 @@ export const addLabel = label => ({
   payload: label
 });
 
+export const justAddLabel = (labelData = {}) => {
+  return dispatch => {
+    return dispatch(addLabel(labelData));
+  };
+};
+
 export const startAddLabel = (labelData = {}) => {
   return dispatch => {
     const { boardId = 0, labelColor = "", labelText = "" } = labelData;

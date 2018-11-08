@@ -8,6 +8,7 @@ import BoardHeader from "./BoardHeader";
 import Lists from "./Lists";
 import db from "../firebase/firebase";
 import { justAddCard } from "../actions/Lists";
+import { justAddLabel } from "../actions/Label";
 
 class Board extends Component {
   static propTypes = {
@@ -44,10 +45,28 @@ class Board extends Component {
           }
         });
       });
+    this.labels = db
+      .collection("boards")
+      .doc(boardId.toString())
+      .collection("labels")
+      .onSnapshot(querySnapchot => {
+        querySnapchot.docChanges().forEach(change => {
+          if (change.type === "added") {
+            this.props.justAddLabel({ ...change.doc.data(), boardId });
+          }
+          if (change.type === "modified") {
+            this.props.justAddLabel({ ...change.doc.data(), boardId });
+          }
+          if (change.type === "removed") {
+            console.log("REMOVE LABEL: ", change.doc.data());
+          }
+        });
+      });
   };
 
   componentWillUnmount = () => {
     this.cards();
+    this.labels();
   };
 
   // The following three methods implement dragging of the board by holding down the mouse
@@ -138,7 +157,8 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  justAddCard: cardData => dispatch(justAddCard(cardData))
+  justAddCard: cardData => dispatch(justAddCard(cardData)),
+  justAddLabel: labelData => dispatch(justAddLabel(labelData))
   //justRemoveList: (boardId, listId) => dispatch(justRemoveList(boardId, listId))
 });
 
