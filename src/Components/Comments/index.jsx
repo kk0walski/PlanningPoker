@@ -1,12 +1,14 @@
 import React, { Component } from "react";
-import RepositoryList from "../Repository/RepositoryList";
+import { connect } from "react-redux";
 import Loading from "../Loading";
 import FetchMore from "../FetchMore";
+import CommentsList from "./CommentsList";
 
-export default class Repositories extends Component {
+class Comments extends Component {
   constructor(props) {
     super(props);
     this.fetchMore = this.fetchMore.bind(this);
+    const { owner, project } = props;
     this.octokit = require("@octokit/rest")({
       timeout: 0,
       headers: {
@@ -24,18 +26,29 @@ export default class Repositories extends Component {
     this.state = {
       hasNextPage: false,
       result: undefined,
-      data: undefined
+      data: undefined,
+      owner,
+      project
     };
   }
 
-  componentWillMount() {
-    this.octokit.repos.getAll({ per_page: 10 }).then(result => {
-      this.setState({
-        hasNextPage: this.octokit.hasNextPage(result),
-        result,
-        data: result.data
+  componentDidMount() {
+    const { owner, project } = this.state;
+    const { issue } = this.props;
+    this.octokit.issues
+      .getComments({
+        owner,
+        repo: project,
+        number: issue.number,
+        per_page: 10
+      })
+      .then(result => {
+        this.setState({
+          hasNextPage: this.octokit.hasNextPage(result),
+          result,
+          data: result.data
+        });
       });
-    });
   }
 
   async fetchMore() {
@@ -48,12 +61,11 @@ export default class Repositories extends Component {
   }
 
   render() {
-    if (this.state.data) {
-      const { data, hasNextPage } = this.state;
-      const { match } = this.props;
+    const { data, hasNextPage } = this.state;
+    if (data) {
       return (
         <div>
-          <RepositoryList repositories={data} match={match} />
+          <CommentsList comments={data} />
           <FetchMore hasNextPage={hasNextPage} fetchMore={this.fetchMore} />
         </div>
       );
@@ -62,3 +74,7 @@ export default class Repositories extends Component {
     }
   }
 }
+
+const mapStateToProps = ({ user }) => ({ user });
+
+export default connect(mapStateToProps)(Comments);

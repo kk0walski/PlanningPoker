@@ -30,6 +30,7 @@
     "react-scripts": "2.0.5",
     "react-sidenav": "3.0.9",
     "react-textarea-autosize": "^7.0.4",
+    "recompose": "^0.30.0",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
     "slugify": "^1.3.1",

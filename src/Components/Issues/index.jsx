@@ -44,11 +44,11 @@ export default class OrganisationIssues extends Component {
           <Switch>
             <Route
               exact
-              path="/organisation/:owner/:project"
+              path="/repository/:owner/:project"
               component={openIssues}
             />
             <Route
-              path="/organisation/:owner/:project/closed"
+              path="/repository/:owner/:project/closed"
               component={closedIssues}
             />
           </Switch>
