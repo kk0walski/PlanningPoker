@@ -83,6 +83,7 @@ input[type="submit"] {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
 }
+
 .pagination {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -95,6 +96,7 @@ input[type="submit"] {
 .page-link:not(:disabled):not(.disabled) {
   cursor: pointer;
 }
+
 .page-link {
   position: relative;
   display: block;
@@ -140,4 +142,25 @@ img {
   border-radius: 0.25rem;
   max-width: 100%;
   height: auto;
+}
+
+pre {
+  font-family: “Consolas”, monospace;
+  font-size: 9pt;
+  text-align: left;
+  background-color: #fcf7ec;
+  overflow-x: auto; /* Use horizontal scroller if needed; for Firefox 2, not
+  white-space: pre-wrap; /* css-3 */
+  white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
+  word-wrap: pre-wrap; /* Internet Explorer 5.5+ */
+  margin: 0px 0px 0px 0px;
+  padding: 5px 5px 3px 5px;
+  white-space: normal; /* crucial for IE 6, maybe 7? */
+  width: 100vh;
+}
+
+@media (max-width: 700px) {
+  pre {
+    width: 35vh;
+  }
 }
