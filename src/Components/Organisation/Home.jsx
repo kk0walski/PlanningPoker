@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import DataList from "./DataList";
-import Loading from "../Repository/Loading";
+import Loading from "../Loading";
 import Pagination from "react-js-pagination";
 import queryString from "query-string";
 class Home extends Component {

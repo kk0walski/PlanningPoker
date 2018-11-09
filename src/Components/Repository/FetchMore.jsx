@@ -1,6 +1,6 @@
 import React from "react";
 
-import Loading from "./Loading";
+import Loading from "../Loading";
 import { ButtonUnobtrusive } from "./Button";
 
 const FetchMore = ({ loading, hasNextPage, fetchMore, children }) => (

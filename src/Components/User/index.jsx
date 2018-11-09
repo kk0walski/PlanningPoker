@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Helmet } from "react-helmet";
 import classnames from "classnames";
 import Header from "../Header";
-import Loading from "./Loading";
+import Loading from "../Loading";
 import Repositories from "./Repositories";
 
 class User extends Component {

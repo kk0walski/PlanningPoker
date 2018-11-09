@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import UserList from "../User/UserList";
-import Loading from "../Repository/Loading";
+import Loading from "../Loading";
 import Pagination from "react-js-pagination";
 class Basic extends React.Component {
   constructor(props) {

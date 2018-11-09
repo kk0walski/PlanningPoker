@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Loading from "./Loading";
+import Loading from "../Loading";
 import classnames from "classnames";
 import { Link } from "react-router-dom";
 
